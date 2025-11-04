@@ -4,7 +4,7 @@
 
 int main() {
     int** random_matrix(int n, int min, int max);
-    int** square_matrix_multiply(int** A, int** B, int n);
+    int** strassen_method(int** A, int** B, int n);
     int n, min, max;
 
     printf("Enter matrix size: ");
@@ -25,7 +25,7 @@ int main() {
             printf(" %d ", A[i][j]);
         }
 
-        printf("]\t[");
+        printf("]    [");
 
         for (int j=0; j<n; j++) {
             printf(" %d ", B[i][j]);
@@ -33,7 +33,7 @@ int main() {
         printf("]\n");
     }
 
-    int** C = square_matrix_multiply(A, B, n);
+    int** C = strassen_method(A, B, n);
 
     printf("multiplication:\n");
     for (int i=0; i<n; i++) {

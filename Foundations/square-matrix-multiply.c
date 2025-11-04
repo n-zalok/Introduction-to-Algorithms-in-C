@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <math.h>
-#include <stdio.h>
 
 int** square_matrix_multiply(int** A, int** B, int n) {
     int** random_matrix(int n, int min, int max);

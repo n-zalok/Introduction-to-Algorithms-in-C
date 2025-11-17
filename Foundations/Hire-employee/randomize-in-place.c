@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int randomize_in_place(int arr[], int n) {
+void randomize_in_place(int arr[], int n) {
     srand(time(NULL));
     
     for (int i=0; i<n; i++) {
@@ -10,6 +10,4 @@ int randomize_in_place(int arr[], int n) {
         arr[i] = arr[index];
         arr[index] = temp;
     }
-
-    return 0;
 }

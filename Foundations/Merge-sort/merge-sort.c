@@ -1,6 +1,6 @@
 #include <math.h>
 
-int merge_sort(int arr[], int p, int r) {
+void merge_sort(int arr[], int p, int r) {
     int merge(int arr[], int p, int q, int r);
 
     if (p < r) {
@@ -9,6 +9,4 @@ int merge_sort(int arr[], int p, int r) {
         merge_sort(arr, q+1, r);
         merge(arr, p, q, r);
     }
-
-    return 0;
 }

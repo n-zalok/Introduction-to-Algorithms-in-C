@@ -1,4 +1,4 @@
-int merge(int arr[], int p, int q, int r) {
+void merge(int arr[], int p, int q, int r) {
     #define INF 2147483647
 
     int n1 = q - p + 1;
@@ -20,6 +20,4 @@ int merge(int arr[], int p, int q, int r) {
     for (int k=p; k<=r; k++) {
         arr[k] = (L[i] <= R[j]) ? (L[i++]) : (R[j++]);
     }
-
-    return 0;
 }

@@ -26,8 +26,8 @@ int** strassen_method(int** A, int** B, int n) {
 int** power_of_two_strassen(int** A, int** B, int n) {
     int** random_matrix(int n, int min, int max);
     int*** matrix_split(int** M, int n);
-    int matrix_sum(int** C, int** M1, int** M2, int n, int sign);
-    int matrix_combine(int** M, int** M11, int** M12, int** M21, int** M22, int n);
+    void matrix_sum(int** C, int** M1, int** M2, int n, int sign);
+    void matrix_combine(int** M, int** M11, int** M12, int** M21, int** M22, int n);
 
     int** C = random_matrix(n, 0, 0);
 

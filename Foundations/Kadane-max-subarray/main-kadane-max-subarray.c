@@ -7,7 +7,7 @@ struct subarray {
 };
 
 int main() {
-    int random_array(int arr[], int n, int min, int max);
+    void random_array(int arr[], int n, int min, int max);
     struct subarray kadane_max_subarray(int arr[], int n);
     int n, min, max;
 

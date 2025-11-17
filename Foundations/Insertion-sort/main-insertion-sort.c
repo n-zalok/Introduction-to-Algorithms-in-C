@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 int main() {
-    int random_array(int arr[], int n, int min, int max);
-    int insertion_sort(int arr[], int n);
+    void random_array(int arr[], int n, int min, int max);
+    void insertion_sort(int arr[], int n);
     int n, min, max;
 
     printf("Enter array size: ");

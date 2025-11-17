@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 struct heap {
     int *arr;
@@ -11,16 +12,21 @@ void draw_heap(struct heap A) {
     void draw_heap_recursive(struct heap A, int i, int curr_h, int digits);
     int h = floor(log2(A.length));
 
-    int max = A.arr[0];
+    int most_positive = 0;
+    int most_negative = 0;
     for (int i=1; i<A.length; i++){
-        if(A.arr[i] > max) {
-            max = A.arr[i];
+        if (A.arr[i] > most_positive) {
+            most_positive = A.arr[i];
+        }
+        if (A.arr[i] < most_negative) {
+            most_negative = A.arr[i];
         }
     }
 
-    int digits = floor(log10(max)) + 1;
+    int pos_digits = floor(log10(most_positive)) + 1;
+    int neg_digits = floor(log10(abs(most_negative))) + 2;
 
-    draw_heap_recursive(A, 0, h, digits);
+    draw_heap_recursive(A, 0, h, (pos_digits > neg_digits) ? pos_digits : neg_digits);
 }
 
 void draw_heap_recursive(struct heap A, int i, int curr_h, int digits) {

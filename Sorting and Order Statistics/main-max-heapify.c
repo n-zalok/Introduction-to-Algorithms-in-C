@@ -7,31 +7,29 @@ struct heap {
 };
 
 int main() {
-    void random_array(int arr[], int n, int min, int max);
     void draw_heap(struct heap A);
+    void max_heapify(struct heap A, int i);
     int n, min, max;
 
     printf("Enter array size: ");
     scanf("%d", &n);
-    printf("Enter array min: ");
-    scanf("%d", &min);
-    printf("Enter array max: ");
-    scanf("%d", &max);
 
     int arr[n];
-    random_array(arr, n, min, max);
+    arr[0] = 0;
+    for (int i=n-1; i>0; i--) {
+        arr[n-i] = i;
+    }
 
     struct heap A;
     A.arr = arr;
     A.length = n;
     A.heap_size = n;
 
-    printf("array: [");
-    for (int i=0; i<A.length; i++) {
-        printf(" %d ", A.arr[i]);
-    }
-    printf("]\n");
+    printf("heap:\n");
+    draw_heap(A);
 
+    max_heapify(A, 0);
+    printf("max heap:\n");
     draw_heap(A);
 
     return 0;

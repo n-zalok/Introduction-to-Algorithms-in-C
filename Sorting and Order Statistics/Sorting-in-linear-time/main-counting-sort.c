@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+int main() {
+    void random_array(int arr[], int n, int min, int max);
+    int* counting_sort(int *A, int n, int k);
+    int n, min, max;
+
+    printf("Enter array size: ");
+    scanf("%d", &n);
+
+    do {
+        printf("Enter array min(>=0): ");
+        scanf("%d", &min);
+    }
+    while (min < 0);
+
+    do {
+        printf("Enter array max(>=0): ");
+        scanf("%d", &max);
+    }
+    while (max < 0);
+
+    int arr[n];
+    random_array(arr, n, min, max);
+
+    printf("Unsorted array: [");
+    for (int i=0; i<n; i++) {
+        printf(" %d ", arr[i]);
+    }
+    printf("]\n");
+
+
+    int *sorted_arr = counting_sort(arr, n, max);
+    printf("Sorted array:   [");
+    for (int i=0; i<n; i++) {
+        printf(" %d ", sorted_arr[i]);
+    }
+    printf("]\n");
+
+    return 0;
+}

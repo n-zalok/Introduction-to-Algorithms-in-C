@@ -11,13 +11,18 @@ int main() {
     void heap_sort(struct heap *A);
     int n, min, max;
 
-    printf("Enter array size: ");
-    scanf("%d", &n);
+    // get array size, min and max
+    do {
+        printf("Enter array size(n>0): ");
+        scanf("%d", &n);
+    }
+    while (n <= 0);
     printf("Enter array min: ");
     scanf("%d", &min);
     printf("Enter array max: ");
     scanf("%d", &max);
 
+    // generate random array
     int arr[n];
     random_array(arr, n, min, max);
 
@@ -31,8 +36,8 @@ int main() {
     A.arr = arr;
     A.length = n;
 
+    // heap sort
     heap_sort(&A);
-
     printf("Sorted array: [");
     for (int i=0; i<n; i++) {
         printf(" %d ", A.arr[i]);

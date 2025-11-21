@@ -16,13 +16,18 @@ int main() {
     void max_heap_insert(struct heap *A, int key);
     int n, min, max;
 
-    printf("Enter array size: ");
-    scanf("%d", &n);
+    // get array size, min and max
+    do {
+        printf("Enter array size(n>0): ");
+        scanf("%d", &n);
+    }
+    while (n <= 0);
     printf("Enter array min: ");
     scanf("%d", &min);
     printf("Enter array max: ");
     scanf("%d", &max);
 
+    // generate random array
     int arr[n];
     random_array(arr, n, min, max);
 
@@ -36,14 +41,15 @@ int main() {
     A.arr = arr;
     A.length = n;
 
+    // print max priority queue
     build_max_heap(&A);
     printf("max heap:\n");
     draw_heap(A);
 
-
+    // heap_max
     printf("heap_max: %d\n", heap_max(A));
 
-
+    // heap_extract_max and its effect
     printf("heap_extract_max: %d\n", heap_extract_max(&A));
 
     printf("array after heap_extract_max: [");
@@ -55,7 +61,7 @@ int main() {
     printf("heap after heap_extract_max:\n");
     draw_heap(A);
 
-
+    // heap_increase_key and its effect
     heap_increase_key(A, A.heap_size-1, A.arr[0]+1);
 
     printf("array after heap_increase_key on last element in the heap: [");
@@ -67,7 +73,7 @@ int main() {
     printf("heap after heap_increase_key on last element in the heap:\n");
     draw_heap(A);
 
-
+    // max_heap_insert and its effect
     max_heap_insert(&A, 10);
 
     printf("array after max_heap_insert of 10: [");

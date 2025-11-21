@@ -10,12 +10,14 @@ struct heap {
 void heap_increase_key(struct heap A, int i, int key) {
     int parent(int i);
 
+    // error if new key is smaller than current key
     if (key < A.arr[i]) {
         perror("ERROR: new key is smaller than current key");
     }
 
     A.arr[i] = key;
 
+    // re-maximize the heap
     int temp;
     while (i > 0 && A.arr[parent(i)] < A.arr[i]) {
         temp = A.arr[i];

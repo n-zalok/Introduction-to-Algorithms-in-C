@@ -3,6 +3,7 @@ int** square_matrix_scale(int** M, int before, int after, int fill) {
 
     int** M_scaled = random_matrix(after, 0, 0);
 
+    // scale beforexbefore matrix into afterxafter matrix filling with fill
     for (int i=0; i<after; i++) {
         for (int j=0; j<after; j++) {
             if (i >= before || j >= before) {

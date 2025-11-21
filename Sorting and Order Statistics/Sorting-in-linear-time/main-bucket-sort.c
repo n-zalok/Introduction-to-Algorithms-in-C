@@ -8,10 +8,14 @@ int main() {
     double min = 0.0;
     double max = 1.0;
 
-    printf("Enter array size: ");
-    scanf("%d", &n);
+    // get array size, min and max
+    do {
+        printf("Enter array size(n>0): ");
+        scanf("%d", &n);
+    }
+    while (n <= 0);
 
-
+    // generate random array
     double arr[n];
     random_double_array(arr, n, min, max);
 
@@ -21,7 +25,7 @@ int main() {
     }
     printf("]\n");
 
-
+    // bucket sort
     bucket_sort(arr, n);
     printf("Sorted array:   [");
     for (int i=0; i<n; i++) {

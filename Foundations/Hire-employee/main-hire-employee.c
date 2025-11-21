@@ -6,16 +6,20 @@ int main() {
     int* hire_employee(int arr[], int n);
     int n, min, max;
 
-    printf("Enter array size: ");
-    scanf("%d", &n);
+    // get array size, min and max
+    do {
+        printf("Enter array size(n>0): ");
+        scanf("%d", &n);
+    }
+    while (n <= 0);
     printf("Enter array min: ");
     scanf("%d", &min);
     printf("Enter array max: ");
     scanf("%d", &max);
 
+    // generate random array
     int arr[n];
     random_array(arr, n, min, max);
-    randomize_in_place(arr, n);
 
     printf("Candidates: [");
     for (int i=0; i<n; i++) {
@@ -23,7 +27,8 @@ int main() {
     }
     printf("]\n");
 
-    // Hiring process
+    // hiring process
+    randomize_in_place(arr, n);
     int* result = hire_employee(arr, n);
     printf("Score of candidate: %d, Index of candidate: %d, Number of hirings: %d\n", result[0], result[1], result[2]);
 

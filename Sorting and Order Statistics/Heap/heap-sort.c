@@ -12,6 +12,7 @@ void heap_sort(struct heap *A) {
 
     int temp;
     for (int i=(A->length)-1; i>=1; i--) {
+        // exchange current largest element (arr[0]) with arr[i]
         temp = A->arr[0];
         A->arr[0] = A->arr[i];
         A->arr[i] = temp;

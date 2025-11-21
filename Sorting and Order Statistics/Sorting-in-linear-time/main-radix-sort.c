@@ -6,21 +6,26 @@ int main() {
     int* radix_sort(int *A, int n, int d);
     int n, min, max;
 
-    printf("Enter array size: ");
-    scanf("%d", &n);
+    // get array size, min and max
+    do {
+        printf("Enter array size(n>0): ");
+        scanf("%d", &n);
+    }
+    while (n <= 0);
 
     do {
         printf("Enter array min(>=0): ");
         scanf("%d", &min);
     }
     while (min < 0);
-
+    
     do {
         printf("Enter array max(>=0): ");
         scanf("%d", &max);
     }
     while (max < 0);
 
+    // generate random array
     int arr[n];
     random_array(arr, n, min, max);
 
@@ -30,7 +35,7 @@ int main() {
     }
     printf("]\n");
 
-
+    // radix sort
     int *sorted_arr = radix_sort(arr, n, ((int)floor(log10(max)))+1);
     printf("Sorted array:   [");
     for (int i=0; i<n; i++) {

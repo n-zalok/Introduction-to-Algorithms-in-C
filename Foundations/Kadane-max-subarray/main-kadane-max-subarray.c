@@ -11,13 +11,18 @@ int main() {
     struct subarray kadane_max_subarray(int arr[], int n);
     int n, min, max;
 
-    printf("Enter array size: ");
-    scanf("%d", &n);
+    // get array size, min and max
+    do {
+        printf("Enter array size(n>0): ");
+        scanf("%d", &n);
+    }
+    while (n <= 0);
     printf("Enter array min: ");
     scanf("%d", &min);
     printf("Enter array max: ");
     scanf("%d", &max);
 
+    // generate random array
     int arr[n];
     random_array(arr, n, min, max);
 
@@ -27,7 +32,7 @@ int main() {
     }
     printf("]\n");
 
-    // Find Max Subarray Kadane
+    // find max subarray
     struct subarray max_subarray = kadane_max_subarray(arr, n);
     printf("Max Subarray: [");
     for (int i=max_subarray.low; i<=max_subarray.high; i++) {

@@ -5,8 +5,12 @@ int main() {
     int* counting_sort(int *A, int n, int k);
     int n, min, max;
 
-    printf("Enter array size: ");
-    scanf("%d", &n);
+    // get array size, min and max
+    do {
+        printf("Enter array size(n>0): ");
+        scanf("%d", &n);
+    }
+    while (n <= 0);
 
     do {
         printf("Enter array min(>=0): ");
@@ -20,6 +24,7 @@ int main() {
     }
     while (max < 0);
 
+    // generate random array
     int arr[n];
     random_array(arr, n, min, max);
 
@@ -30,6 +35,7 @@ int main() {
     printf("]\n");
 
 
+    // counting sort
     int *sorted_arr = counting_sort(arr, n, max);
     printf("Sorted array:   [");
     for (int i=0; i<n; i++) {

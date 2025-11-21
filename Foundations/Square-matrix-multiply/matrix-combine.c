@@ -1,4 +1,5 @@
 void matrix_combine(int** M, int** M11, int** M12, int** M21, int** M22, int n) {
+    // combine M11, M12, M21, M22 to form M
     for (int i=0; i<n; i++) {
         for (int j=0; j<n; j++) {
             if (i < n/2 && j < n/2) {

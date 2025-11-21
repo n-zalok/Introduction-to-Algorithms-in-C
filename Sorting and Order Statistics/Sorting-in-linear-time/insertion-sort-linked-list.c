@@ -10,14 +10,11 @@ struct node {
 void insertion_sort_linked_list(struct node start) {
     #define NULL ((void *)0)
 
-    struct node *current = &start;
-    if ((current->next)->next == NULL) {
-        return;
-    }
+    struct node *current = &start;  // current element
+    struct node *head;              // comparison head
+    double key;                     // current value
 
-    struct node *head;
-    double key;
-
+    // insertion sort
     while ((current->next)->next != NULL) {
         current = current->next;
         head = current;

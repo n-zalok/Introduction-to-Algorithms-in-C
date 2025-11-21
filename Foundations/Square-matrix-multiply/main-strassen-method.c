@@ -7,13 +7,18 @@ int main() {
     int** strassen_method(int** A, int** B, int n);
     int n, min, max;
 
-    printf("Enter matrix size: ");
-    scanf("%d", &n);
+    // get matrix size, min and max
+    do {
+        printf("Enter matrix size(n>0): ");
+        scanf("%d", &n);
+    }
+    while (n <= 0);
     printf("Enter matrix min: ");
     scanf("%d", &min);
     printf("Enter matrix max: ");
     scanf("%d", &max);
 
+    // generate random matrices
     srand(time(NULL));
     int** A = random_matrix(n, min, max);
     int** B = random_matrix(n, min, max);
@@ -33,6 +38,7 @@ int main() {
         printf("]\n");
     }
 
+    // multiply A and B
     int** C = strassen_method(A, B, n);
 
     printf("multiplication:\n");

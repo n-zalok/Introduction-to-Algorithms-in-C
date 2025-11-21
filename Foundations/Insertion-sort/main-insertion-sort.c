@@ -5,13 +5,18 @@ int main() {
     void insertion_sort(int arr[], int n);
     int n, min, max;
 
-    printf("Enter array size: ");
-    scanf("%d", &n);
+    // get array size, min and max
+    do {
+        printf("Enter array size(n>0): ");
+        scanf("%d", &n);
+    }
+    while (n <= 0);
     printf("Enter array min: ");
     scanf("%d", &min);
     printf("Enter array max: ");
     scanf("%d", &max);
 
+    // generate random array
     int arr[n];
     random_array(arr, n, min, max);
 
@@ -21,7 +26,7 @@ int main() {
     }
     printf("]\n");
 
-    // Insertion Sort
+    // insertion sort
     insertion_sort(arr, n);
     printf("Sorted array: [");
     for (int i=0; i<n; i++) {

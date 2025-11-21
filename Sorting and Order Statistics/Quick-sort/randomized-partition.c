@@ -5,8 +5,9 @@ int randomized_partition(int *A, int p, int r) {
     int partition(int *A, int p, int r);
 
     srand(time(NULL));
-    int i = (rand() % (r - p + 1)) + p;
+    int i = (rand() % (r - p + 1)) + p;  // random integer between p and r [p,r]
 
+    // exchange A[r] with A[i] to make A[i] the pivot point
     int temp = A[r];
     A[r] = A[i];
     A[i] = temp;

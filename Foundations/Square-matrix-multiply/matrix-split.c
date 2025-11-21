@@ -3,11 +3,13 @@
 int*** matrix_split(int** M, int n) {
     int** random_matrix(int n, int min, int max);
 
+    // create 4 empty matrices of n/2xn/2
     int** M11 = random_matrix(n/2, 0, 0);
     int** M12 = random_matrix(n/2, 0, 0);
     int** M21 = random_matrix(n/2, 0, 0);
     int** M22 = random_matrix(n/2, 0, 0);
 
+    // copy elements from M into submatrices
     for (int i=0; i<n; i++) {
         for (int j=0; j<n; j++) {
             if (i < n/2 && j < n/2) {
@@ -25,6 +27,7 @@ int*** matrix_split(int** M, int n) {
         }
     }
 
+    // contain submatrices in an array
     int*** arr = (int***)malloc(4 * sizeof(int**));
     arr[0] = M11; arr[1] = M12; arr[2] = M21; arr[3] = M22; 
 

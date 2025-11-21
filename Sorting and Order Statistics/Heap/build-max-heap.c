@@ -9,7 +9,7 @@ struct heap {
 void build_max_heap(struct heap *A) {
     void max_heapify(struct heap A, int i);
 
-    A->heap_size = A->length;
+    A->heap_size = A->length; // include all elements in the heap
     for (int i=floor(A->length/2)-1; i>=0; i--) {
         max_heapify(*A, i);
     }

@@ -2,10 +2,8 @@ int quadratic_probing(int k, int i, int m) {
     int hash(int k, int m);
 
     int result = hash(k, m) + (i*i);
-    if (result < m) {
-        return result;
+    while (result >= m) {
+        result -= m;
     }
-    else {
-        return result - m;
-    }
+    return result;
 }

@@ -25,8 +25,8 @@ void draw_heap(struct heap A) {
         }
     }
 
-    int pos_digits = floor(log10(most_positive)) + 1;
-    int neg_digits = floor(log10(abs(most_negative))) + 2;
+    int pos_digits = (most_positive > 0) ? ((log10(most_positive)) + 1) : 1;
+    int neg_digits = (most_negative < 0) ? ((log10(abs(most_negative))) + 2) : 1;
     int digits = (pos_digits > neg_digits) ? pos_digits : neg_digits;
 
 

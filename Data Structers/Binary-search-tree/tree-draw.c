@@ -23,7 +23,7 @@ struct ll {
 };
 
 
-void draw_tree(struct node *x, int m) {
+void tree_darw(struct node *x, int m) {
     struct ll* build_map(struct node *x, int *most_negative, int *most_positive, int *h, int m);
 
     int most_negative, most_positive, h;

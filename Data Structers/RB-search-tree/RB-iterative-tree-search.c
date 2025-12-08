@@ -13,10 +13,10 @@ struct tree {
 
 struct node* RB_iterative_tree_search(struct tree *T, struct node *x, int k) {
     while (x != T->null && k != x->key) {
-        if (k < x->key) {
+        if (k < x->key) {  // search the left branch
             x = x->left;
         }
-        else {
+        else {  // search the right branch
             x = x->right;
         }
     }

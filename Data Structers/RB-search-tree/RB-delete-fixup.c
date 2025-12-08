@@ -21,24 +21,26 @@ void RB_delete_fixup(struct tree *T, struct node *x) {
         if (x == x->p->left) {
             w = x->p->right;
 
-            if (x->color == 'r') {
+            if (x->color == 'r') {  // case 1
                 w->color = 'b';
                 x->p->color = 'r';
                 left_rotate(T, x->p);
                 w = x->p->right;
             }
 
-            if (w->left->color == 'b' && w->right->color =='b') {
+            if (w->left->color == 'b' && w->right->color =='b') {  // case 2
                 w->color = 'r';
                 x = x->p;
             }
             else {
-                if (w->right->color == 'b') {
+                if (w->right->color == 'b') { // case 3
                     w->left->color = 'b';
                     w->color = 'r';
                     right_rotate(T, w);
                     w = x->p->right;
                 }
+
+                // case 4
                 w->color = x->p->color;
                 x->p->color = 'b';
                 w->right->color = 'b';
@@ -46,7 +48,7 @@ void RB_delete_fixup(struct tree *T, struct node *x) {
                 x = T->root;
             }
         }
-        else {
+        else {  // same but with left and right exchanged
             w = x->p->left;
 
             if (x->color == 'r') {

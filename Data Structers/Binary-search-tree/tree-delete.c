@@ -1,3 +1,5 @@
+// any element in the left subtree is smaller than the node
+// any element in the right subtree is larger than the node
 struct node {
     int key;
     struct node *p;
@@ -21,6 +23,8 @@ void tree_delete(struct tree *T, struct node *z) {
         transplant(T, z, z->left);
     }
     else {
+        // the smallest in the right branch is larger than the left branch
+        // so it would replace z
         struct node *y = tree_minimum(z->right);
         if (y->p != z) {
             transplant(T, y, y->right);

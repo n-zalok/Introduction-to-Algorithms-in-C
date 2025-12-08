@@ -7,6 +7,7 @@ struct node {
 };
 
 int hash_insert(struct node *T, int k, int m, char p) {
+    #define NIL -1
     int linear_probing(int k, int i, int m);
     int quadratic_probing(int k, int i, int m);
     int double_hashing(int k, int i, int m);
@@ -24,7 +25,7 @@ int hash_insert(struct node *T, int k, int m, char p) {
             j = double_hashing(k, i, m);
         }
 
-        if (T[j].key == -1) {
+        if (T[j].key == NIL) {
             T[j].key = k;
             return j;
         }

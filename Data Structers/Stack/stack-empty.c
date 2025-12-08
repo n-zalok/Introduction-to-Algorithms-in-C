@@ -1,7 +1,7 @@
 struct stack {
     int* arr;
     int size;
-    int top;
+    int top;  // last added element
 };
 
 int stack_empty(struct stack S) {

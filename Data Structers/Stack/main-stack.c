@@ -3,7 +3,7 @@
 struct stack {
     int* arr;
     int size;
-    int top;
+    int top;  // last added element
 };
 
 int main() {
@@ -20,11 +20,14 @@ int main() {
     while (n <= 0);
     int arr[n];
     
+    // create stack
     struct stack S;
     S.arr = arr;
     S.size = n;
     S.top = -1; 
 
+    // op to hold operation to be performed
+    // x to hold element's value
     int op, x;
     while (1) {
         do {

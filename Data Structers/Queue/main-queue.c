@@ -3,8 +3,8 @@
 struct queue {
     int* arr;
     int size;
-    int head;
-    int tail;
+    int head; // element that has been longest in the queue
+    int tail; // next location for insertion
 };
 
 int main() {
@@ -20,12 +20,15 @@ int main() {
     while (n <= 0);
     int arr[n];
     
+    // create queue
     struct queue Q;
     Q.arr = arr;
     Q.size = n;
     Q.head = 0;
     Q.tail = 0; 
 
+    // op to hold operation to be performed
+    // x to hold element's value
     int op, x;
     while (1) {
         do {

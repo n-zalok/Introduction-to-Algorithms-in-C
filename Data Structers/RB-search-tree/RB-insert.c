@@ -18,12 +18,12 @@ struct tree {
 void RB_insert(struct tree *T, int k) {
     void RB_insert_fixup(struct tree *T, struct node *z);
 
-    struct node *z = (struct node *)malloc(sizeof(struct node));
+    struct node *z = (struct node *)malloc(sizeof(struct node));  // new node to be inserted
     z->key = k;
-    struct node *y = T->null;
-    struct node *x = T->root;
+    struct node *y = T->null;  // z's parent
+    struct node *x = T->root;  // placeholder
 
-    while (x != T->null) {
+    while (x != T->null) {  // find correct place for z
         y = x;
         if (z->key < x->key) {
             x = x->left;
@@ -37,6 +37,7 @@ void RB_insert(struct tree *T, int k) {
         }
     }
 
+    // insert z
     z->p = y;
     if (y == T->null) {
         T->root = z;
@@ -52,5 +53,6 @@ void RB_insert(struct tree *T, int k) {
     z->right = T->null;
     z->color = 'r';
 
+    // fix what insertion messed up
     RB_insert_fixup(T, z);
 }

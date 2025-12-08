@@ -21,23 +21,25 @@ void RB_insert_fixup(struct tree *T, struct node *z) {
         if (z->p == z->p->p->left) {
             y = z->p->p->right;
             
-            if (y->color == 'r') {
+            if (y->color == 'r') {  // case 1
                 z->p->color = 'b';
                 y->color = 'b';
                 z->p->p->color = 'b';
                 z = z->p->p;
             }
             else {
-                if (z == z->p->right) {
+                if (z == z->p->right) {  // case 2
                     z = z->p;
                     left_rotate(T, z);
                 }
+                
+                // case 3
                 z->p->color = 'b';
                 z->p->p->color = 'r';
                 right_rotate(T, z->p->p);
             }
         }
-        else {
+        else {  // same but with left and right exchanged
             y = z->p->p->left;
             
             if (y->color == 'r') {

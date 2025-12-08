@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// any element in the left subtree is smaller than the node
+// any element in the right subtree is larger than the node
 struct node {
     int key;
     struct node *p;
@@ -28,16 +30,19 @@ int main() {
     }
     while (m <= 0);
 
+    // create Binary-tree
     struct tree T;
     T.root = NULL;
 
+    // op to hold operation to be performed
     char op;
+    // key to hold element value
     int key;
-    struct node *z;
+    // current to hold node's address
     struct node *current;
     while (1) {
         do {
-            printf("Choose operation insert(i) or delete(d) or search(s) or print(p) or walk(w): ");
+            printf("Choose operation insert(i) or search(s) or delete(d) or print(p) or walk(w): ");
             scanf("%c", &op);
         }
         while (op != 'i' && op != 'd' && op != 's' && op != 'p' && op != 'w');
@@ -51,8 +56,7 @@ int main() {
             printf("Enter key: ");
             scanf("%d", &key);
 
-            z = iterative_tree_search(T.root, key);
-            if ( z != NULL) {
+            if ( iterative_tree_search(T.root, key) != NULL) {
                 printf("Found\n");
             }
             else {
@@ -63,9 +67,9 @@ int main() {
             printf("Enter key: ");
             scanf("%d", &key);
 
-            z = iterative_tree_search(T.root, key);
-            if (z != NULL) {
-                tree_delete(&T, z);
+            current = iterative_tree_search(T.root, key);
+            if (current != NULL) {
+                tree_delete(&T, current);
                 printf("Node deleted\n");
             }
             else {

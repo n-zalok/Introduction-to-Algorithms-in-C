@@ -29,6 +29,8 @@ void RB_delete(struct tree *T, struct node *z) {
         RB_transplant(T, z, z->left);
     }
     else {
+        // the smallest in the right branch is larger than the left branch
+        // so it would replace z
         y = RB_tree_minimum(T, z->right);
         x = y->right;
 
@@ -46,6 +48,7 @@ void RB_delete(struct tree *T, struct node *z) {
         y->left->p = y;
         y->color = z->color;
 
+        // fix what deletion messed up
         if (y_original_color == 'b') {
             RB_delete_fixup(T, x);
         }

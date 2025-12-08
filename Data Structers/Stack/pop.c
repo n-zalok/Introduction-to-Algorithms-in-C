@@ -4,7 +4,7 @@
 struct stack {
     int* arr;
     int size;
-    int top;
+    int top;  // last added element
 };
 
 int pop(struct stack *S) {

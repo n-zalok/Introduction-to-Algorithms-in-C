@@ -6,29 +6,35 @@ struct node {
 };
 
 int main() {
+    #define NIL -1
     int hash_insert(struct node *T, int k, int m, char p);
     int hash_search(struct node *T, int k, int m, char p);
     int m;
     char p;
 
-    // get hash table size
+    // get hash-table's size
     do {
         printf("Enter hash table size(size>0): ");
         scanf("%d", &m);
     }
     while (m <= 0);
+    // get probing type
     do {
         printf("Enter probing type linear(L) or quadratic(Q) or double(D): ");
         scanf("%c", &p);
     }
     while (p != 'L' && p != 'Q' && p != 'D');
 
+    // create hash-table
     struct node T[m];
     for (int i=0; i<m; i++) {
-        T[i].key = -1;
+        T[i].key = NIL;
     }
 
+    // op to hold operation to be performed
     char op;
+    // key to hold element value
+    // index to hold element's address
     int key, index;
     while (1) {
         do {
@@ -54,7 +60,7 @@ int main() {
             while (key < 0);
 
             index = hash_search(T, key, m, p);
-            if (index != -1) {
+            if (index != NIL) {
                 printf("Found at %d\n", index);
             }
             else {

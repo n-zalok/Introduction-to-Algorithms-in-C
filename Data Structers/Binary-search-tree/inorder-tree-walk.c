@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// any element in the left subtree is smaller than the node
+// any element in the right subtree is larger than the node
 struct node {
     int key;
     struct node *p;

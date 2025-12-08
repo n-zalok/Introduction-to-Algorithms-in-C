@@ -27,20 +27,24 @@ int main() {
     }
     while (m <= 0);
 
+    // create the sentenil node
     struct node null;
     null.color = 'b';
+
+    // create RB-tree
     struct tree T;
     T.root = &null;
     T.null = &null;
     
-
+    // op to hold operation to be performed
     char op;
+    // key to hold element value
     int key;
-    struct node *z;
+    // current to hold node's address
     struct node *current;
     while (1) {
         do {
-            printf("Choose operation insert(i) or delete(d) or search(s) or print(p): ");
+            printf("Choose operation insert(i) or search(s) or delete(d) or print(p): ");
             scanf("%c", &op);
         }
         while (op != 'i' && op != 'd' &&  op != 's' && op != 'p');
@@ -54,8 +58,7 @@ int main() {
             printf("Enter key: ");
             scanf("%d", &key);
 
-            z = RB_iterative_tree_search(&T, T.root, key);
-            if ( z != T.null) {
+            if ( RB_iterative_tree_search(&T, T.root, key) != T.null) {
                 printf("Found\n");
             }
             else {
@@ -66,9 +69,9 @@ int main() {
             printf("Enter key: ");
             scanf("%d", &key);
 
-            z = RB_iterative_tree_search(&T, T.root, key);
-            if (z != T.null) {
-                RB_delete(&T, z);
+            current = RB_iterative_tree_search(&T, T.root, key);
+            if (current != T.null) {
+                RB_delete(&T, current);
                 printf("Node deleted\n");
             }
             else {

@@ -15,18 +15,21 @@ int main() {
     #define NULL ((void *)0)
     void list_insert(struct dll *L, int k);
     struct node* list_search(struct dll L, int k);
-    void list_delete(struct dll *L, struct node x);
+    void list_delete(struct dll *L, struct node *x);
     
+    // create linked list
     struct dll L;
     L.head = NULL;
 
+    // op to hold operation to be performed
     char op;
+    // key to hold element value
     int key;
-    struct node *x;
+    // current to hold node's address
     struct node *current;
     while (1) {
         do {
-            printf("Choose operation insert(i) or delete(d) or search(s) print(p): ");
+            printf("Choose operation insert(i) or search(s) or delete(d) or print(p): ");
             scanf("%c", &op);
         }
         while (op != 'i' && op != 'd' && op != 's' && op != 'p');
@@ -37,24 +40,25 @@ int main() {
             
             list_insert(&L, key);
         }
-        else if (op == 'd') {
+        else if (op == 's') {
             printf("Enter key: ");
             scanf("%d", &key);
-            x = list_search(L, key);
 
-            if (x != NULL) {
-                list_delete(&L, *x);
-                printf("Element deleted\n");
+            if (list_search(L, key) != NULL) {
+                printf("Found\n");
             }
             else {
                 printf("Not found\n");
             }
         }
-        else if (op == 's') {
+        else if (op == 'd') {
             printf("Enter key: ");
             scanf("%d", &key);
-            if (list_search(L, key) != NULL) {
-                printf("Found\n");
+            current = list_search(L, key);
+
+            if (current != NULL) {
+                list_delete(&L, current);
+                printf("Element deleted\n");
             }
             else {
                 printf("Not found\n");

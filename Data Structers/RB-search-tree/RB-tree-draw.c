@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define INF 2147483647
 #define NULL ((void *)0)
+#define INF 2147483647  // represent skipped virtual nodes
 
 struct node {
     int key;
@@ -33,6 +33,7 @@ struct ll {
 void RB_tree_draw(struct tree *T, struct node *x, int m) {
     struct ll* build_map(struct tree *T, struct node *x, int *most_negative, int *most_positive, int *h, int m);
 
+    // h is tree's height/depth
     int most_negative, most_positive, h;
     most_negative = 0;
     most_positive = 0;
@@ -40,6 +41,8 @@ void RB_tree_draw(struct tree *T, struct node *x, int m) {
 
     struct ll *HT = build_map(T, x, &most_negative, &most_positive, &h, m);
 
+    // determine max number of digits to be printed per element
+    // to get a symmetrical tree
     int neg_digits = (most_negative < 0) ? ((log10(abs(most_negative))) + 2) : 1;
     int pos_digits = (most_positive > 0) ? ((log10(most_positive)) + 1) : 1;
     int digits = (pos_digits > neg_digits) ? pos_digits : neg_digits;
@@ -59,6 +62,7 @@ void RB_tree_draw(struct tree *T, struct node *x, int m) {
             printf(" ");
         }
 
+        // print nodes at ith depth
         current = HT[i].head;
         while (current != NULL) {
             if (current->key != INF) {
@@ -72,7 +76,7 @@ void RB_tree_draw(struct tree *T, struct node *x, int m) {
                     printf("%0*d", digits, current->key);
                 }
             }
-            else {
+            else {  // skip placeholders
                 for (int k=0; k<digits; k++) {
                     printf(" ");
                 }
@@ -90,8 +94,12 @@ void RB_tree_draw(struct tree *T, struct node *x, int m) {
     printf("\n");
 }
 
+
+// build a chained hash-table of the nodes where T[i] is the list of nodes of ith depth 
 struct ll* build_map(struct tree *T, struct node *x, int *most_negative, int *most_positive, int *h, int m) {
     void recursive_build_map(struct tree *T, struct node *x, struct ll *HT, int *most_negative, int *most_positive, int *h, int m, int depth);
+
+    // create hash-table
     struct ll *HT = malloc(m * sizeof *HT);
     for (int i = 0; i < m; i++) {
         HT[i].head = NULL;
@@ -105,7 +113,7 @@ struct ll* build_map(struct tree *T, struct node *x, int *most_negative, int *mo
 void recursive_build_map(struct tree *T, struct node *x, struct ll *HT, int *most_negative, int *most_positive, int *h, int m, int depth) {
     void RB_single_list_insert(struct ll *L, int k, char c);
 
-    if (x != T->null && depth < m) {
+    if (x != T->null && depth < m) {  // if node exists add it
         if (x->key < *most_negative) {
             *most_negative = x->key;
         }
@@ -121,7 +129,7 @@ void recursive_build_map(struct tree *T, struct node *x, struct ll *HT, int *mos
         RB_single_list_insert(&HT[depth], x->key, x->color);
         recursive_build_map(T, x->left, HT, most_negative, most_positive, h, m, depth+1);
     }
-    else if (x == T->null && depth < m) {
+    else if (x == T->null && depth < m) {  // else add a placeholder
         recursive_build_map(T, T->null, HT, most_negative, most_positive, h, m, depth+1);
         RB_single_list_insert(&HT[depth], INF, 'b');
         recursive_build_map(T, T->null, HT, most_negative, most_positive, h, m, depth+1);

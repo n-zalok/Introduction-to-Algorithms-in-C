@@ -4,6 +4,7 @@ struct node {
 };
 
 int hash_search(struct node *T, int k, int m, char p) {
+    #define NIL -1
     int linear_probing(int k, int i, int m);
     int quadratic_probing(int k, int i, int m);
     int double_hashing(int k, int i, int m);
@@ -28,8 +29,8 @@ int hash_search(struct node *T, int k, int m, char p) {
             i += 1;
         }
     }
-    while (T[j].key != -1 && i < m);
+    while (T[j].key != NIL && i < m);
 
     
-    return -1;
+    return NIL;
 }

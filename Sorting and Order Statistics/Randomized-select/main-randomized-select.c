@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <time.h>
 
 int main() {
+    srand(time(NULL));
     void random_array(int arr[], int n, int min, int max);
     int randomized_select(int *A, int p, int r, int i);
     int n, min, max, i;

@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int main() {
+    srand(time(NULL));
     void random_array(int arr[], int n, int min, int max);
     void matrix_chain_order(int *p, int n, int **m, int **s);
     void print_optimal_parens(int **s, int i, int j);

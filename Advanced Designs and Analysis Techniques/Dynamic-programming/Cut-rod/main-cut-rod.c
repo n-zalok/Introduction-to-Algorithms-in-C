@@ -2,6 +2,7 @@
 #include <time.h>
 
 int main() {
+    srand(time(NULL));
     void random_increasing_array(int arr[], int n, int min, int max);
     int cut_rod(int *p, int n);
     int* memoized_cut_rod(int *p, int n);

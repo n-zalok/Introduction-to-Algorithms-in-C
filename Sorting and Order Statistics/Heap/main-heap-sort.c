@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 
 struct heap {
     int *arr;
@@ -7,6 +8,7 @@ struct heap {
 };
 
 int main() {
+    srand(time(NULL));
     void random_array(int arr[], int n, int min, int max);
     void heap_sort(struct heap *A);
     int n, min, max;

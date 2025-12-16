@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <time.h>
 
 int main() {
+    srand(time(NULL));
     void random_array(int arr[], int n, int min, int max);
     void randomize_in_place(int arr[], int n);
     int* hire_employee(int arr[], int n);

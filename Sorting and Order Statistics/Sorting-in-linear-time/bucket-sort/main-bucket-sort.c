@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <time.h>
 
 int main() {
+    srand(time(NULL));
     void random_double_array(double arr[], int n, double min, double max);
     void bucket_sort(double *A, int n);
     int n;

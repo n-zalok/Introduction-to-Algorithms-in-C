@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 
 struct subarray {
     int low;
@@ -7,6 +8,7 @@ struct subarray {
 };
 
 int main() {
+    srand(time(NULL));
     void random_array(int arr[], int n, int min, int max);
     struct subarray find_max_subarray(int arr[], int low, int high);
     int n, min, max;

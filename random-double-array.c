@@ -1,9 +1,6 @@
 #include <stdlib.h>
-#include <time.h>
 
-void random_double_array(double arr[], int n, double min, double max) {
-    srand(time(NULL));
-    
+void random_double_array(double arr[], int n, double min, double max) {    
     for (int i=0; i<n; i++) {
         // random double between min and max [min,max)
         double scale = (double)rand() / (RAND_MAX + 1.0);

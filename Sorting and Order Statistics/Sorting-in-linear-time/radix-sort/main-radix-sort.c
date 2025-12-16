@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 
 int main() {
+    srand(time(NULL));
     void random_array(int arr[], int n, int min, int max);
     int* radix_sort(int *A, int n, int d);
     int n, min, max;

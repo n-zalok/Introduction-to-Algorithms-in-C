@@ -13,8 +13,8 @@ void max_heapify(struct heap A, int i) {
     int R = right(i);
 
     // select largest between i, L and R
-    largest = (L < A.heap_size & A.arr[L] > A.arr[i]) ? L : i;
-    if (R < A.heap_size & A.arr[R] > A.arr[largest]) {
+    largest = (L < A.heap_size && A.arr[L] > A.arr[i]) ? L : i;
+    if (R < A.heap_size && A.arr[R] > A.arr[largest]) {
         largest = R;
     }
 

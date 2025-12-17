@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <errno.h>
+
+struct heap {
+    int *arr;
+    int length;
+    int heap_size;
+};
+
+void heap_decrease_key(struct heap A, int i, int key) {
+    int parent(int i);
+
+    // error if new key is larger than current key
+    if (key > A.arr[i]) {
+        perror("ERROR: new key is larger than current key");
+    }
+
+    A.arr[i] = key;
+
+    // re-minimize the heap
+    int temp;
+    while (i > 0 && A.arr[parent(i)] > A.arr[i]) {
+        temp = A.arr[i];
+        A.arr[i] = A.arr[parent(i)];
+        A.arr[parent(i)] = temp;
+
+        i = parent(i);
+    }
+}

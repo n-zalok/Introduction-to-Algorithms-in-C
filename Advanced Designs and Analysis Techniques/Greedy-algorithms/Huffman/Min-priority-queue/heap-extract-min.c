@@ -1,13 +1,21 @@
 #include <stdio.h>
 #include <errno.h>
+#include <stdlib.h>
+
+struct node {
+    char character;
+    int frequency;
+    struct node *left;
+    struct node *right;
+};
 
 struct heap {
-    int *arr;
+    struct node *arr;
     int length;
     int heap_size;
 };
 
-int heap_extract_min(struct heap *A) {
+struct node* heap_extract_min(struct heap *A) {
     void min_heapify(struct heap A, int i);
 
     // error if heap is empty
@@ -15,10 +23,11 @@ int heap_extract_min(struct heap *A) {
         perror("ERROR: heap underflow");
     }
 
+    struct node *min = malloc(sizeof(struct node));
     // exchange first element with last element
-    int min = A->arr[0];                
+    *min = A->arr[0];                
     A->arr[0] = A->arr[(A->heap_size)-1];
-    A->arr[(A->heap_size)-1] = min;       
+    A->arr[(A->heap_size)-1] = *min;       
 
     // re-minimize the heap
     A->heap_size -= 1;

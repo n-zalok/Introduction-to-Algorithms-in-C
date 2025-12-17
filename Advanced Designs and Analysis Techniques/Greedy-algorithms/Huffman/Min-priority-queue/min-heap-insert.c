@@ -1,16 +1,23 @@
 #include <stdlib.h>
 
+struct node {
+    char character;
+    int frequency;
+    struct node *left;
+    struct node *right;
+};
+
 struct heap {
-    int *arr;
+    struct node *arr;
     int length;
     int heap_size;
 };
 
-void min_heap_insert(struct heap *A, int key) {
+void min_heap_insert(struct heap *A, struct node *z) {
     #define INF 2147483647
     void heap_decrease_key(struct heap A, int i, int key);
 
-    int *new_arr = malloc(sizeof(int) * (A->length + 1));  // create new array with one more slot
+    struct node *new_arr = malloc(sizeof(struct node) * (A->length + 1));  // create new array with one more slot
     // copy elements from old array
     for (int i=0; i<(A->length); i++) {
         new_arr[i] = A->arr[i];
@@ -27,6 +34,7 @@ void min_heap_insert(struct heap *A, int key) {
     // to avoid overwriting
     A->arr[(A->length)-1] = A->arr[(A->heap_size)-1];
 
-    A->arr[(A->heap_size)-1] = INF;
-    heap_decrease_key(*A, (A->heap_size)-1, key);
+    A->arr[(A->heap_size)-1] = *z;
+    A->arr[(A->heap_size)-1].frequency = INF;
+    heap_decrease_key(*A, (A->heap_size)-1, z->frequency);
 }

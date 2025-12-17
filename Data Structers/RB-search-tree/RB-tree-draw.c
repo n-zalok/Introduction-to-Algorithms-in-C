@@ -30,7 +30,7 @@ struct ll {
 };
 
 
-void RB_tree_draw(struct tree *T, struct node *x, int m) {
+void RB_tree_draw(struct tree *T, struct node *x, int m) {  // m is maximum depth to draw
     struct ll* build_map(struct tree *T, struct node *x, int *most_negative, int *most_positive, int *h, int m);
 
     // h is tree's height/depth

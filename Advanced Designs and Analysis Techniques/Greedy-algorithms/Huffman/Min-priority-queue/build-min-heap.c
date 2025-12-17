@@ -1,7 +1,14 @@
 #include <math.h>
 
+struct node {
+    char character;
+    int frequency;
+    struct node *left;
+    struct node *right;
+};
+
 struct heap {
-    int *arr;
+    struct node *arr;
     int length;
     int heap_size;
 };

@@ -25,7 +25,7 @@ struct ll {
 };
 
 
-void tree_darw(struct node *x, int m) {
+void tree_darw(struct node *x, int m) {  // m is maximum depth to draw
     struct ll* build_map(struct node *x, int *most_negative, int *most_positive, int *h, int m);
     
     // h is tree's height/depth

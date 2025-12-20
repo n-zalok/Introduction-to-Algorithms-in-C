@@ -22,15 +22,16 @@ int main() {
     }
     while (min <= 0);
     do {
-        printf("Enter max dimension(max>0): ");
+        printf("Enter max dimension(max>=min): ");
         scanf("%d", &max);
     }
-    while (max <= 0);
+    while (max < min);
 
     // generate dimensions array
     int p[n+1];
     random_array(p, n+1, min, max);
 
+    // print dimensions array
     printf("Dimensions array: [");
     for (int i=0; i<=n; i++) {
         printf(" %d ", p[i]);
@@ -47,6 +48,7 @@ int main() {
         s[i] = (int*)malloc((n+1) * sizeof(int));
     }
 
+    // get optimal parenthesization
     matrix_chain_order(p, n, m, s);
     printf("Parenthesization: ");
     print_optimal_parens(s, 1, n);

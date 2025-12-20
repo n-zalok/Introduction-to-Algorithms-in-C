@@ -1,11 +1,11 @@
 #include <stdio.h>
 
 void print_LCS(int **b, char *X, int i, int j) {
-    if (i == 0 || j == 0) {
+    if (i == 0 || j == 0) {  // end of string
         return;
     }
 
-    if (b[i][j] == 0) {
+    if (b[i][j] == 0) { // matching character
         print_LCS(b, X, i-1, j-1);
         printf(" %c ", X[i]);
     }

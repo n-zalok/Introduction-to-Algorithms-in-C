@@ -27,12 +27,14 @@ int main() {
     struct node_ll* huffman_table(struct node *root);
     int n, min, max;
 
-    // get array size, min and max
+    // get number of characters in the alphabet
     do {
         printf("Enter number of characters(0<n<=26): ");
         scanf("%d", &n);
     }
     while (n <= 0 || n > 26);
+
+    // get min and max frequency
     do {
         printf("Enter min frequency(min>0): ");
         scanf("%d", &min);
@@ -48,6 +50,7 @@ int main() {
     int freq[n];
     random_array(freq, n, min, max);
 
+    // create the alphabet
     struct node C[n];
     for (int i=0; i<n; i++) {
         C[i].frequency = freq[i];
@@ -56,16 +59,17 @@ int main() {
         C[i].right = NULL;
     }
 
-
+    // print the alphabet alongside frequencies
     printf("Alphabet array (character, frequency): [");
     for (int i=0; i<n; i++) {
         printf(" (%c, %d) ", C[i].character, C[i].frequency);
     }
     printf("]\n");
 
-    
+    // get optimal coding tree
     struct node *root = huffman(C, n);
     
+    // get codewords then print them
     struct node_ll *current = huffman_table(root);
     while (current != NULL) {
         printf(" %c : ", current->character);

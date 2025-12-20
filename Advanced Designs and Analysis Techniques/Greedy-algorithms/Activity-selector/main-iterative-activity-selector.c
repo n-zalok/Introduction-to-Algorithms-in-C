@@ -9,7 +9,7 @@ int main() {
     int iterative_activity_selector(int *s, int *f, int n, int *A);
     int n, max;
 
-    // get array size, min and max
+    // get number of activities and max finish time
     do {
         printf("Enter number of activities(n>0): ");
         scanf("%d", &n);
@@ -32,6 +32,7 @@ int main() {
         s[i] = f[i] - ((rand() % (f[i])) + 1);  // [1, f[i]]
     }
 
+    // print start and finish times
     printf("Start times:  [");
     for (int i=1; i<=n; i++) {
         printf(" %d ", s[i]);
@@ -44,9 +45,12 @@ int main() {
     }
     printf("]\n");
 
+    // A to hold compatible activities
     int A[n+1];
+    // counter to hold number of activities in A
     int counter = iterative_activity_selector(s, f, n, A);
 
+    // get max number of compatible activities
     printf("Maximum number of compatible activities: %d\n", counter-1);
     printf("Compatible activities: [");
     for (int i=1; i<counter; i++) {

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <time.h>
+#include <stdlib.h>
 
 int main() {
     srand(time(NULL));
@@ -24,31 +25,34 @@ int main() {
     }
     while (min <= 0);
     do {
-        printf("Enter max revenue(max>0): ");
+        printf("Enter max revenue(max>=min): ");
         scanf("%d", &max);
     }
-    while (max <= 0);
+    while (max < min);
 
     // generate random revenue array
     int p[n+1];
     random_increasing_array(p, n+1, min, max);
 
+    // print revenue array
     printf("Revenue array: [");
     for (int i=1; i<=n; i++) {
         printf(" %d ", p[i]);
     }
     printf("]\n");
 
-
+    // measure time of each method
     clock_t start, end;
     double cpu_time_used;
 
+    // recursive
     start = clock();
     int recursive_revenue = cut_rod(p, n);
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("Recursive cut rod|  max_revenue: %d    time: %fs\n", recursive_revenue, cpu_time_used);
 
+    // memoized
     start = clock();
     int* r_ = memoized_cut_rod(p, n);
     end = clock();
@@ -56,6 +60,7 @@ int main() {
     int memoized_revenue = r_[n];
     printf("Memoized cut rod |  max_revenue: %d    time: %fs\n", memoized_revenue, cpu_time_used);
 
+    // bottom-up
     int r[n+1];
     int s[n+1];
     start = clock();
@@ -65,7 +70,7 @@ int main() {
     int  bottom_up_revenue = r[n];
     printf("Bottom-Up cut rod|  max_revenue: %d    time: %fs\n", bottom_up_revenue, cpu_time_used);
 
-
+    // print cuts
     print_cut_rod_solution(n, s);
 
     return 0;

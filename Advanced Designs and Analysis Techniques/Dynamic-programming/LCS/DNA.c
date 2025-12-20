@@ -2,6 +2,7 @@
 #include <errno.h>
 #include <stdio.h>
 
+// returns a sequence of nucleotides of length n
 char* DNA(int n) {
     void random_array(int arr[], int n, int min, int max);
 

@@ -10,8 +10,10 @@ void construct_optimal_BST(int **root, int n) {
     print_recursive(root, r+1, n, 'r');
 }
 
+
+// direction (l = left, r = right)
 void print_recursive(int **root, int i, int j, char direction) {
-    if (i > j) {
+    if (i > j) {  // unsuccessful search
         if (direction == 'l') {
             printf("d%d is the left child of k%d\n", i-1, i);
         }
@@ -20,7 +22,7 @@ void print_recursive(int **root, int i, int j, char direction) {
         }
     }
 
-    else {
+    else {  // successful search
         int r = root[i][j];
 
         if (direction == 'l') {

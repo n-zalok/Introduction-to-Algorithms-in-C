@@ -18,7 +18,6 @@ int main() {
     }
     while (n <= 0);
 
-
     // generate keys probability array
     double p[n+1];
     random_double_array(p, n+1, -1, 1);
@@ -38,11 +37,13 @@ int main() {
         q[i] = exp(q[i]) / sum;
         p[i] = exp(p[i]) / sum;
     }
-
-    // sorting
     sum = 0.0;
 
+    // sorting
     double_merge_sort(p, 1, n);
+    double_merge_sort(q, 0, n);
+
+    // printing keys and dummy keys
     printf("Keys array:       [");
     for (int i=1; i<=n; i++) {
         printf(" %f ", p[i]);
@@ -50,7 +51,6 @@ int main() {
     }
     printf("]\n");
 
-    double_merge_sort(q, 0, n);
     printf("Dummy keys array: [");
     for (int i=0; i<=n; i++) {
         printf(" %f ", q[i]);
@@ -58,6 +58,7 @@ int main() {
     }
     printf("]\n");
 
+    // make sure probabilities sum to one
     printf("Sum of keys and dummy keys probabilities: %f\n", sum);
 
 
@@ -71,7 +72,7 @@ int main() {
     }
     e[n+1] = (double*)malloc((n+1) * sizeof(double));
 
-    
+    // get optimal binary search tree
     optimal_BST(p, q, n, e, root);
     printf("Optimal BST cost: %f\n", e[1][n]);
     construct_optimal_BST(root, n);

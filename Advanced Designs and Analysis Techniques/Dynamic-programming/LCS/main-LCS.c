@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdlib.h>
 
 int main() {
     srand(time(NULL));
@@ -25,6 +26,7 @@ int main() {
     char *X = DNA(m);
     char *Y = DNA(n);
 
+    // print X and Y
     printf("X: [");
     for (int i=1; i<=m; i++) {
         printf(" %c ", X[i]);
@@ -37,7 +39,6 @@ int main() {
     }
     printf("]\n");
 
-
     // create array of pointers to represent a matrix    
     int** b = (int**)malloc((m+1) * sizeof(int*));
     int** c = (int**)malloc((m+1) * sizeof(int*));
@@ -47,6 +48,7 @@ int main() {
         c[i] = (int*)malloc((n+1) * sizeof(int));
     }
 
+    // get optimal longest common subsequence
     LCS_length(X, Y, m, n, b, c);
     printf("LCS length: %d\n", c[m][n]);
     printf("LCS: [");

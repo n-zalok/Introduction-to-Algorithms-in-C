@@ -1,6 +1,6 @@
 #include <math.h>
 
-void double_merge_sort(double arr[], int p, int r) {
+void double_merge_sort(double arr[], int p, int r) {  // merge sort for double array
     void double_merge(double arr[], int p, int q, int r);
 
     if (p < r) {

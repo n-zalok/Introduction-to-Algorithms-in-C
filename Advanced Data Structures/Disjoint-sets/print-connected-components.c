@@ -1,18 +1,24 @@
 #include <stdio.h>
 
-struct node {
+// Note not all members of each structure required
+// for every application but we just unify the definition
+struct vertex {
     int key;
-    int rank;
-    struct node *p;
+    int rank;          // to use union by rank in sets
+    struct vertex *p;  // parent
+    int d;             // distance in BFS and discovery time in DFS
+    int f;             // finish time
+    char color;
 };
 
 struct edge {
-    struct node *from;
-    struct node *to;
+    struct vertex *from;
+    struct vertex *to;
+    int w;  // weight
 };
 
 struct graph {
-    struct node *V;
+    struct vertex *V;
     struct edge *E;
 };
 
@@ -29,7 +35,7 @@ struct ll {
 
 void print_connected_components(struct graph *G, int n) {
     #define NULL ((void *)0)
-    struct node* find_set(struct node *x);
+    struct vertex* find_set(struct vertex *x);
     void single_list_insert(struct ll *L, int k);
 
     struct ll T[n];
@@ -40,8 +46,8 @@ void print_connected_components(struct graph *G, int n) {
     struct ll components;
     components.head = NULL;
     for (int i=0; i<n; i++) {
-        struct node *v = &(G->V[i]);
-        struct node *set = find_set(v);
+        struct vertex *v = &(G->V[i]);
+        struct vertex *set = find_set(v);
 
         if (T[(set->key)-1].head == NULL) {
             single_list_insert(&components, set->key);

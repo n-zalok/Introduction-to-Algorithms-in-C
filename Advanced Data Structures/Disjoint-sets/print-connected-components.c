@@ -4,16 +4,16 @@
 // for every application but we just unify the definition
 struct vertex {
     int key;
-    int rank;          // to use union by rank in sets
-    struct vertex *p;  // parent
-    int d;             // distance in BFS and discovery time in DFS
-    int f;             // finish time
+    int rank;  // to use union by rank in sets
+    int p;     // parent
+    int d;     // distance in BFS and discovery time in DFS
+    int f;     // finish time
     char color;
 };
 
 struct edge {
-    struct vertex *from;
-    struct vertex *to;
+    int from;
+    int to;
     int w;  // weight
 };
 
@@ -35,7 +35,7 @@ struct ll {
 
 void print_connected_components(struct graph *G, int n) {
     #define NULL ((void *)0)
-    struct vertex* find_set(struct vertex *x);
+    int find_set(struct vertex *V, int x);
     void single_list_insert(struct ll *L, int k);
 
     struct ll T[n];
@@ -46,13 +46,12 @@ void print_connected_components(struct graph *G, int n) {
     struct ll components;
     components.head = NULL;
     for (int i=0; i<n; i++) {
-        struct vertex *v = &(G->V[i]);
-        struct vertex *set = find_set(v);
+        int set = find_set(G->V, i);
 
-        if (T[(set->key)-1].head == NULL) {
-            single_list_insert(&components, set->key);
+        if (T[set].head == NULL) {
+            single_list_insert(&components, set);
         }
-        single_list_insert(&T[(set->key)-1], v->key);
+        single_list_insert(&T[set], i);
     }
 
     printf("Components:\n");
@@ -60,10 +59,10 @@ void print_connected_components(struct graph *G, int n) {
     while (component != NULL) {
         printf("[");
 
-        struct node_ll *vertex = T[(component->key)-1].head;
-        while (vertex != NULL) {
-            printf(" %d ", vertex->key);
-            vertex = vertex->next;
+        struct node_ll *u = T[component->key].head;
+        while (u != NULL) {
+            printf(" %d ", u->key);
+            u = u->next;
         }
 
         printf("]\n");

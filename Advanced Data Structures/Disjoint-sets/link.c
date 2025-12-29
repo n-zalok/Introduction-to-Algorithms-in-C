@@ -2,19 +2,19 @@
 // for every application but we just unify the definition
 struct vertex {
     int key;
-    int rank;          // to use union by rank in sets
-    struct vertex *p;  // parent
-    int d;             // distance in BFS and discovery time in DFS
-    int f;             // finish time
+    int rank;  // to use union by rank in sets
+    int p;     // parent
+    int d;     // distance in BFS and discovery time in DFS
+    int f;     // finish time
     char color;
 };
 
 void link(struct vertex *x, struct vertex *y) {
     if (x->rank > y->rank) {
-        y->p = x;
+        y->p = x->key;
     }
     else {
-        x->p = y;
+        x->p = y->key;
         if (x->rank == y->rank) {
             y->rank += 1;
         }

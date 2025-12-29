@@ -2,16 +2,16 @@
 // for every application but we just unify the definition
 struct vertex {
     int key;
-    int rank;          // to use union by rank in sets
-    struct vertex *p;  // parent
-    int d;             // distance in BFS and discovery time in DFS
-    int f;             // finish time
+    int rank;  // to use union by rank in sets
+    int p;     // parent
+    int d;     // distance in BFS and discovery time in DFS
+    int f;     // finish time
     char color;
 };
 
-void union_sets(struct vertex *x, struct vertex *y) {
+void union_sets(struct vertex *V, int x, int y) {
     void link(struct vertex *x, struct vertex *y);
-    struct vertex* find_set(struct vertex *x);
+    int find_set(struct vertex *V, int x);
     
-    link(find_set(x), find_set(y));
+    link(&V[find_set(V, x)], &V[find_set(V, y)]);
 }

@@ -6,16 +6,16 @@
 // for every application but we just unify the definition
 struct vertex {
     int key;
-    int rank;          // to use union by rank in sets
-    struct vertex *p;  // parent
-    int d;             // distance in BFS and discovery time in DFS
-    int f;             // finish time
+    int rank;  // to use union by rank in sets
+    int p;     // parent
+    int d;     // distance in BFS and discovery time in DFS
+    int f;     // finish time
     char color;
 };
 
 struct edge {
-    struct vertex *from;
-    struct vertex *to;
+    int from;
+    int to;
     int w;  // weight
 };
 
@@ -56,7 +56,7 @@ int main() {
 
     printf("Edges: [");
     for (int i=0; i<m; i++) {
-        printf(" (%d, %d) ", G.E[i].from->key, G.E[i].to->key);
+        printf(" (%d, %d) ", G.E[i].from, G.E[i].to);
     }
     printf("]\n");
 

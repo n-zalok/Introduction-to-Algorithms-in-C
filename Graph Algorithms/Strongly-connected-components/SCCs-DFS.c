@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include <stdio.h>
 
 // Note not all members of each structure required
 // for every application but we just unify the definition
@@ -34,48 +34,51 @@ struct ll {
 };
 
 
-int topological_time = 0;
+int SCCs_time = 0;
 
-struct ll* topological_sort(struct graph *G, int n, struct ll *Adj) {
+void SCCs_DFS(struct graph *G, int n, struct ll *Adj, struct ll *order) {
+    #define NULL ((void *)0)
     #define NIL -1
-    void topological_DFS_visit(struct graph *G, struct ll *Adj, int u, struct ll *order);
+    void SCCs_DFS_visit(struct graph *G, struct ll *Adj, int u);
 
     for (int i=0; i<n; i++) {
         G->V[i].color = 'w';
         G->V[i].p = NIL;
     }
 
-    struct ll *order = malloc(sizeof(struct ll));
-    for (int i=0; i<n; i++) {
-        if (G->V[i].color == 'w') {
-            topological_DFS_visit(G, Adj, i, order);
+    printf("SCCs:\n");
+    struct node_ll *v = order->head;
+    while (v != NULL) {
+        if (G->V[v->key].color == 'w') {
+            printf("[");
+            SCCs_DFS_visit(G, Adj, v->key);
+            printf("]\n");
         }
-    }
 
-    return order;
+        v = v->next;
+    }
 }
 
-void topological_DFS_visit(struct graph *G, struct ll *Adj, int u, struct ll *order) {
+void SCCs_DFS_visit(struct graph *G, struct ll *Adj, int u) {
     #define NULL ((void *)0)
-    void single_list_insert(struct ll *L, int key, int w);
 
-    topological_time += 1;
-    G->V[u].d = topological_time;
+    printf(" %d ", u);
+
+    SCCs_time += 1;
+    G->V[u].d = SCCs_time;
     G->V[u].color = 'g';
 
     struct node_ll *v = Adj[u].head;
     while (v != NULL) {
         if (G->V[v->key].color == 'w') {
             G->V[v->key].p = u;
-            topological_DFS_visit(G, Adj, v->key, order);
+            SCCs_DFS_visit(G, Adj, v->key);
         }
 
         v = v->next;
     }
 
     G->V[u].color = 'b';
-    topological_time += 1;
-    G->V[u].f = topological_time;
-
-    single_list_insert(order, u, 0);
+    SCCs_time += 1;
+    G->V[u].f = SCCs_time;
 }

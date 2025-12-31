@@ -71,7 +71,9 @@ int main() {
     printf("]\n");
 
     struct ll *Adj = adjacency_list(&G, n, m, 'u');
-    MST_prim(&G, n, Adj, (rand()%n));
+    int r = rand() % n;
+    printf("root: %d\n", r);
+    MST_prim(&G, n, Adj, r);
 
     printf("MST Edges (from, to, weight): [");
     for (int i=0; i<n; i++) {

@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 
 // Note not all members of each structure required
 // for every application but we just unify the definition
@@ -73,7 +72,6 @@ void MST_prim(struct graph *G, int n, struct ll *Adj, int r) {
 
     build_min_heap(&Q);
 
-    printf("root: %d\n", r);
     while (Q.heap_size != 0) {
         struct node *u = heap_extract_min(&Q);
 

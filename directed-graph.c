@@ -48,6 +48,7 @@ void directed_graph(struct graph *G, int n, int m) {
         
         E[i].from = from;
         E[i].to = to;
+        E[i].w = rand() % (2*m);
     }
 
     G->V = V;

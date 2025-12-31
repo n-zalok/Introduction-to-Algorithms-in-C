@@ -26,7 +26,7 @@ struct graph {
 
 int main() {
     srand(time(NULL));
-    void directed_graph(struct graph *G, int n, int m);
+    void undirected_graph(struct graph *G, int n, int m);
     int* MST_kruskal(struct graph *G, int n, int m);
     int n, m;
 
@@ -37,11 +37,11 @@ int main() {
     }
     while (n <= 0);
     
-    m = n * n;
+    m = ((n*n)-n)/2;
 
     // generate random directed graph
     struct graph G;
-    directed_graph(&G, n, m);
+    undirected_graph(&G, n, m);
 
     printf("Vertices: [");
     for (int i=0; i<n; i++) {

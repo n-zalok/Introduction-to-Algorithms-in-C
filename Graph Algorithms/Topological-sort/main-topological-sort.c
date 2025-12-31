@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
-#include <math.h>
 
 // Note not all members of each structure required
 // for every application but we just unify the definition
@@ -51,7 +50,7 @@ int main() {
     }
     while (n <= 0);
 
-    int max_edges = floor(((n*n)-n)/2);
+    int max_edges = ((n*n)-n)/2;
     do {
         printf("Enter number of edges(0<=m<=%d): ", max_edges);
         scanf("%d", &m);

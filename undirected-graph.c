@@ -56,7 +56,7 @@ void undirected_graph(struct graph *G, int n, int m) {
         
         E[i].from = from;
         E[i].to = to;
-        E[i].w = (rand() % (4*m)) - (2*m);
+        E[i].w = (rand() % (3*m)) - m;
     }
 
     G->V = V;

@@ -10,7 +10,9 @@ struct vertex {
 };
 
 void relax(struct vertex *V, int u, int v, int w) {
-    if (V[v].d > (V[u].d + w)) {
+    #define INF 2147483647
+    
+    if (V[u].d != INF && w != INF && V[v].d > (V[u].d + w)) {
         V[v].d = V[u].d + w;
         V[v].p = u;
     }

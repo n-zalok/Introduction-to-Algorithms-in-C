@@ -21,6 +21,7 @@ struct graph {
 };
 
 int bellman_ford(struct graph *G, int n, int m, int s) {
+    #define INF 2147483647
     void initialize_single_source(struct graph *G, int n, int s);
     void relax(struct vertex *V, int u, int v, int w);
     
@@ -39,7 +40,7 @@ int bellman_ford(struct graph *G, int n, int m, int s) {
         struct vertex u = G->V[G->E[j].from];
         struct vertex v = G->V[G->E[j].to];
         int w = G->E[j].w;
-        if (v.d > (u.d + w)) {
+        if (u.d != INF && w != INF && v.d > (u.d + w)) {
             return 0;
         }
     }

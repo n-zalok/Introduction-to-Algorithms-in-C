@@ -22,7 +22,7 @@ struct graph {
 
 void initialize_single_source(struct graph *G, int n, int s) {
     #define NIL -1
-    #define INF 2000000000  // to avoid overflow
+    #define INF 2147483647  // to avoid overflow
 
     for (int i=0; i<n; i++) {
         G->V[i].d = INF;

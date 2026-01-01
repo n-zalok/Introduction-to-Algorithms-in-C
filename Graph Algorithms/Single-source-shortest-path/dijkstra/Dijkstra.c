@@ -77,7 +77,7 @@ void Dijkstra(struct graph *G, int n, struct ll *Adj, int s) {
 
         struct node_ll *v = Adj[u->key].head;
         while (v != NULL) {
-            if (G->V[v->key].d > (G->V[u->key].d + v->w)) {
+            if (G->V[u->key].d != INF && v->w != INF && G->V[v->key].d > (G->V[u->key].d + v->w)) {
                 relax(G->V, u->key, v->key, v->w);
                 heap_decrease_d(&Q, Q.pos[v->key], (G->V[u->key].d + v->w));
             }

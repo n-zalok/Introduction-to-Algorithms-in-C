@@ -34,6 +34,7 @@ struct ll {
     struct node_ll *head;
 };
 
+// return D where D[i][j] is the shortest path from i to j
 int** Johnson(struct graph *G, int n, int m) {
     #define NULL ((void *)0)
     #define INF 2147483647
@@ -41,47 +42,57 @@ int** Johnson(struct graph *G, int n, int m) {
     struct ll* adjacency_list(struct graph *G, int n, int m, char type);
     void Dijkstra(struct graph *G, int n, struct ll *Adj, int s);
 
+    // initialize G_
     struct graph G_;
     struct vertex V[n+1];
     struct edge E[m+n];
+    int s = n;
 
     for (int i=0; i<n; i++) {
         V[i] = G->V[i];
     }
-    V[n].key = n;
+    V[n].key = s;
     G_.V = V;
 
     for (int i=0; i<m; i++) {
         E[i] = G->E[i];
     }
     for (int i=m; i<(m+n); i++) {
-        E[i].from = n;
+        E[i].from = s;
         E[i].to = i - m;
         E[i].w = 0;
     }
     G_.E = E;
 
-    if (bellman_ford(&G_, n+1, m+n, n)) {
+    // do bellman-ford to compute shortest path from new vertex
+    // if no negative cycle exists
+    if (bellman_ford(&G_, n+1, m+n, s)) {
+        // initialize h
         int h[n+1];
         for (int i=0; i<=n; i++) {
             h[i] = G_.V[i].d;
         }
+        // transform weights to be non-negative
         for (int i=0; i<(m+n); i++) {
             if (G_.E[i].w != INF) {
                 G_.E[i].w = G_.E[i].w + h[G_.E[i].from] - h[G_.E[i].to];
             }
         }
 
+        // initialize adjacency list
         struct ll *Adj = adjacency_list(&G_, n+1, m+n, 'd');
+        // initialize D
         int **D = malloc(sizeof(int*) * n);
         for (int i=0; i<n; i++) {
             D[i] = malloc(sizeof(int) * n);
         }
 
+        // run dijkstra for every vertex
         for (int i=0; i<n; i++) {
             Dijkstra(G, n, Adj, i);
             for (int j=0; j<n; j++) {
                 if (G->V[j].d != INF) {
+                    // transform the distance back
                     D[i][j] = G->V[j].d + h[j] - h[i];
                 }
                 else {

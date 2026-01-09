@@ -51,6 +51,8 @@ int main() {
     }
     while (n <= 0);
     
+    // set m to max edges to guarantee multiple possible trees
+    // such that the problem is not trivial
     m = ((n*n)-n)/2;
 
     // generate random directed graph
@@ -58,23 +60,28 @@ int main() {
     undirected_graph(&G, n, m);
     edge_quick_sort(G.E, 0, m-1);
 
+    // print vertices and edges
     printf("Vertices: [");
     for (int i=0; i<n; i++) {
         printf(" %d ", G.V[i].key);
     }
     printf("]\n");
 
-    printf("Edges (from, to, weight): [");
+    printf("Sorted edges (from, to, weight): [");
     for (int i=0; i<m; i++) {
         printf(" (%d, %d, %d) ", G.E[i].from, G.E[i].to, G.E[i].w);
     }
     printf("]\n");
 
+    // get adjacency list
     struct ll *Adj = adjacency_list(&G, n, m, 'u');
+
+    // construct MST with root r
     int r = rand() % n;
     printf("root: %d\n", r);
     MST_prim(&G, n, Adj, r);
 
+    // print MST edges
     printf("MST Edges (from, to, weight): [");
     for (int i=0; i<n; i++) {
         if (G.V[i].p != NIL) {

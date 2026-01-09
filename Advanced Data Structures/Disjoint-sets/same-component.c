@@ -9,6 +9,7 @@ struct vertex {
     char color;
 };
 
+// return True if both vertices belong to the same set
 int same_component(struct vertex *V, int u, int v) {
     int find_set(struct vertex *V, int x);
 

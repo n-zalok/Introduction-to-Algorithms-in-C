@@ -34,10 +34,13 @@ struct ll {
 
 int dfs_time = 0;
 
+// construct a forest containing all vertices of G
+// where v.d and v.f are discovery time and finish time of v
 void DFS(struct graph *G, int n, struct ll *Adj) {
     #define NIL -1
     void DFS_visit(struct graph *G, struct ll *Adj, int u);
 
+    // initialize vertices
     for (int i=0; i<n; i++) {
         G->V[i].color = 'w';
         G->V[i].p = NIL;
@@ -54,9 +57,10 @@ void DFS_visit(struct graph *G, struct ll *Adj, int u) {
     #define NULL ((void *)0)
 
     dfs_time += 1;
-    G->V[u].d = dfs_time;
+    G->V[u].d = dfs_time;  // record discovery time
     G->V[u].color = 'g';
 
+    // visit vertices reachable from u
     struct node_ll *v = Adj[u].head;
     while (v != NULL) {
         if (G->V[v->key].color == 'w') {
@@ -67,7 +71,7 @@ void DFS_visit(struct graph *G, struct ll *Adj, int u) {
         v = v->next;
     }
 
-    G->V[u].color = 'b';
+    G->V[u].color = 'b';   // mark u as finished
     dfs_time += 1;
-    G->V[u].f = dfs_time;
+    G->V[u].f = dfs_time;  // record finish time
 }

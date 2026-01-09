@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// print path from i to j
+// P[i][j] is the parent of j in the shortest path from i to j
 void print_all_pairs_path(int **P, int i, int j) {
     #define NIL -1
     

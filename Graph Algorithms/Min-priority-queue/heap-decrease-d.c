@@ -3,16 +3,17 @@
 
 struct node {
     int key;
-    int d;
+    int d;  // distance
 };
 
 struct heap {
     struct node *arr;
-    int *pos;
+    int *pos;  // pos[i] is the position of ith element
     int length;
     int heap_size;
 };
 
+// decrease distance of ith element to d
 void heap_decrease_d(struct heap *A, int i, int d) {
     int parent(int i);
 

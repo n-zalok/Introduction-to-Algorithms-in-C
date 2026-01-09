@@ -9,6 +9,7 @@ struct vertex {
     char color;
 };
 
+// make the shallow set a child of the deep set
 void link(struct vertex *x, struct vertex *y) {
     if (x->rank > y->rank) {
         y->p = x->key;

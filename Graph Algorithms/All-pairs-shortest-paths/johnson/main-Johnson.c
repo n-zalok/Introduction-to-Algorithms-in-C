@@ -38,7 +38,7 @@ int main() {
     }
     while (n <= 0);
 
-    int max_edges = n * n;
+    int max_edges = n*n;
     do {
         printf("Enter number of edges(0<=m<=%d): ", max_edges);
         scanf("%d", &m);
@@ -50,6 +50,7 @@ int main() {
     struct graph G;
     directed_graph(&G, n, m);
 
+    // print vertices and edges
     printf("Vertices: [");
     for (int i=0; i<n; i++) {
         printf(" %d ", G.V[i].key);
@@ -62,8 +63,9 @@ int main() {
     }
     printf("]\n");
     
+    // compute shortest paths matrix D
     int **D = Johnson(&G, n, m);
-
+    // print all pairs paths
     if (D != NULL) {
         printf("All pairs paths:\n");
         for (int i=0; i<n; i++) {

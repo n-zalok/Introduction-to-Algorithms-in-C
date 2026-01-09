@@ -48,16 +48,19 @@ int main() {
         scanf("%d", &n);
     }
     while (n <= 0);
+
+    int max_edges = n*n;
     do {
-        printf("Enter number of edges(0<=m<=n^2): ");
+        printf("Enter number of edges(0<=m<=%d): ", max_edges);
         scanf("%d", &m);
     }
-    while (m < 0 || m > (n*n));
+    while (m < 0 || m > max_edges);
 
     // generate random directed graph
     struct graph G;
     directed_graph(&G, n, m);
 
+    // print vertices and edges
     printf("Vertices: [");
     for (int i=0; i<n; i++) {
         printf(" %d ", G.V[i].key);
@@ -70,7 +73,7 @@ int main() {
     }
     printf("]\n");
 
-
+    // print adjacency list
     struct ll *Adj = adjacency_list(&G, n, m, 'd');
     printf("Adjacency list:\n");
     for (int i=0; i<n; i++) {
@@ -85,7 +88,7 @@ int main() {
         printf("\n");
     }
 
-    
+    // construct SCCs forest and print SCCs
     kosaraju(&G, n, m, Adj);
 
     return 0;

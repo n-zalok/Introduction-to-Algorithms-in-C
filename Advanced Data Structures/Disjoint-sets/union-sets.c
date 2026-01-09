@@ -9,9 +9,11 @@ struct vertex {
     char color;
 };
 
+// make one set a child to the other set
 void union_sets(struct vertex *V, int x, int y) {
     void link(struct vertex *x, struct vertex *y);
     int find_set(struct vertex *V, int x);
     
+    // link the roots of both vertices
     link(&V[find_set(V, x)], &V[find_set(V, y)]);
 }

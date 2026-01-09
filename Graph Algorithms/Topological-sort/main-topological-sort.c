@@ -61,6 +61,7 @@ int main() {
     struct graph G;
     DAG(&G, n, m);
 
+    // print vertices and edges
     printf("Vertices: [");
     for (int i=0; i<n; i++) {
         printf(" %d ", G.V[i].key);
@@ -73,7 +74,7 @@ int main() {
     }
     printf("]\n");
 
-
+    // print adjacency list
     struct ll *Adj = adjacency_list(&G, n, m, 'd');
     printf("Adjacency list:\n");
     for (int i=0; i<n; i++) {
@@ -88,8 +89,10 @@ int main() {
         printf("\n");
     }
 
+    // get topological order
     struct ll *order = topological_sort(&G, n, Adj);
 
+    // print vertices in topological order
     struct node_ll *v = order->head;
     printf("Topological order: ");
     while (v != NULL) {

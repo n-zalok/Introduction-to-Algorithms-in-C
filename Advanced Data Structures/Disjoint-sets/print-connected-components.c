@@ -36,36 +36,44 @@ struct ll {
 void print_connected_components(struct graph *G, int n) {
     #define NULL ((void *)0)
     int find_set(struct vertex *V, int x);
-    void single_list_insert(struct ll *L, int k);
+    void graph_single_list_insert(struct ll *L, int key, int w);
 
+    // T[i] contains vertices of set with ith vertex as root
     struct ll T[n];
     for (int i=0; i<n; i++) {
         T[i].head = NULL;
     }
 
-    struct ll components;
-    components.head = NULL;
+    // roots is a ll of roots
+    struct ll roots;
+    roots.head = NULL;
     for (int i=0; i<n; i++) {
         int set = find_set(G->V, i);
 
+        // if a new root was found
+        // insert it into roots
         if (T[set].head == NULL) {
-            single_list_insert(&components, set);
+            graph_single_list_insert(&roots, set, 0);
         }
-        single_list_insert(&T[set], i);
+
+        // insert vertex in its list
+        graph_single_list_insert(&T[set], i, 0);
     }
 
-    printf("Components:\n");
-    struct node_ll *component = components.head;
-    while (component != NULL) {
+    // for root in roots
+    printf("Connected components:\n");
+    struct node_ll *u = roots.head;
+    while (u != NULL) {
         printf("[");
 
-        struct node_ll *u = T[component->key].head;
-        while (u != NULL) {
-            printf(" %d ", u->key);
-            u = u->next;
+        // print vertices that belong to that root
+        struct node_ll *v = T[u->key].head;
+        while (v != NULL) {
+            printf(" %d ", v->key);
+            v = v->next;
         }
 
         printf("]\n");
-        component = component->next;
+        u = u->next;
     } 
 }

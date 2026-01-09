@@ -23,37 +23,35 @@ struct graph {
 };
 
 
-void undirected_graph(struct graph *G, int n, int m) {
+// creates a DAG with n vertices and m edges
+void DAG(struct graph *G, int n, int m) {
+    // initialize vertex set
     struct vertex *V = malloc(sizeof(struct vertex) * n);
     for (int i=0; i<n; i++) {
         V[i].key = i;
     }
 
+    // initialize edge set
     struct edge *E = malloc(sizeof(struct edge) * m);
     for (int i=0; i<m; i++) {
-        int forbidden, from, to;
+        int duplicate, from, to;
         do {
-            forbidden = 0;
-            from = (rand() % (n));
-            to = (rand() % (n));
+            duplicate = 0;
+            // make each vertex point only to a vertex with larger key
+            from = (rand() % (n-1));                    // [0,n-2]
+            to = (rand() % (n - from - 1)) + from + 1;  // [from+1,n-1]
 
+            // avoid duplicate edges
             for (int j=0; j<i; j++) {
                 if (E[j].from == from && E[j].to == to) {
-                    forbidden = 1;
-                    break;
-                }
-                else if (E[j].from == to && E[j].to == from) {
-                    forbidden = 1;
-                    break;
-                }
-                else if (from == to) {
-                    forbidden = 1;
+                    duplicate = 1;
                     break;
                 }
             }
         }
-        while (forbidden == 1);
+        while (duplicate == 1);
         
+        // assign
         E[i].from = from;
         E[i].to = to;
         E[i].w = (rand() % (3*m)) - m;

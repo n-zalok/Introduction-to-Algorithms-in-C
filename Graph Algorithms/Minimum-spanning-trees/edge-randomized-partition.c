@@ -7,6 +7,7 @@ struct edge {
     int w;  // weight
 };
 
+// return index of pivot point chosen from [p,r] after partition
 int edge_randomized_partition(struct edge *E, int p, int r) {
     int edge_partition(struct edge *A, int p, int r);
 

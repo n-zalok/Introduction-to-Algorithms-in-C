@@ -20,6 +20,9 @@ struct graph {
     struct edge *E;
 };
 
+// return 0 if a negative cycle exists and 1 otherwise
+// construct a path from s to each reachable vertex v
+// such that v.d is distance from s to v
 int bellman_ford(struct graph *G, int n, int m, int s) {
     #define INF 2147483647
     void initialize_single_source(struct graph *G, int n, int s);
@@ -27,7 +30,10 @@ int bellman_ford(struct graph *G, int n, int m, int s) {
     
     initialize_single_source(G, n, s);
 
+    // the longest path at maximum consists of
+    // n-1 edges so we loop for n-1 times
     for (int i=1; i<n; i++) {
+        // consider all edges
         for (int j=0; j<m; j++) {
             int u = G->E[j].from;
             int v = G->E[j].to;
@@ -40,6 +46,8 @@ int bellman_ford(struct graph *G, int n, int m, int s) {
         struct vertex u = G->V[G->E[j].from];
         struct vertex v = G->V[G->E[j].to];
         int w = G->E[j].w;
+        // if a further relaxation is possible
+        // then a negative cycle exists
         if (u.d != INF && w != INF && v.d > (u.d + w)) {
             return 0;
         }

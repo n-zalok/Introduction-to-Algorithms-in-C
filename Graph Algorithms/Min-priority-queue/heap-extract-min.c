@@ -4,16 +4,17 @@
 
 struct node {
     int key;
-    int d;
+    int d;  // distance
 };
 
 struct heap {
     struct node *arr;
-    int *pos;
+    int *pos;  // pos[i] is the position of ith element
     int length;
     int heap_size;
 };
 
+// return minimum element then re-minimize the heap
 struct node* heap_extract_min(struct heap *A) {
     #define NIL -1
     void min_heapify(struct heap *A, int i);
@@ -25,7 +26,7 @@ struct node* heap_extract_min(struct heap *A) {
 
     struct node *min = malloc(sizeof(struct node));
     // exchange first element with last element
-
+    
     //exchange position
     A->pos[A->arr[(A->heap_size)-1].key] = 0;
     A->pos[A->arr[0].key] = NIL;

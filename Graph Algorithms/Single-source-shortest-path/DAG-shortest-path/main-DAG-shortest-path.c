@@ -60,6 +60,7 @@ int main() {
     struct graph G;
     DAG(&G, n, m);
 
+    // print vertices and edges
     printf("Vertices: [");
     for (int i=0; i<n; i++) {
         printf(" %d ", G.V[i].key);
@@ -72,11 +73,13 @@ int main() {
     }
     printf("]\n");
 
-    struct ll *Adj = adjacency_list(&G, n, m, 'd');
-    int s = rand() % n;
+    // compute shortest paths
+    struct ll *Adj = adjacency_list(&G, n, m, 'd');  // create adjacency list
+    int s = rand() % n;                              // pick a source
     printf("source: %d\n", s);
     DAG_shortest_path(&G, n, m, Adj, s);
 
+    // print shortest paths
     printf("(vertex, shortest-path): [");
     for (int i=0; i<n; i++) {
         printf(" (%d, %d) ", G.V[i].key, G.V[i].d);

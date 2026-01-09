@@ -33,24 +33,27 @@ struct ll {
     struct node_ll *head;
 };
 
-
+// retuen adjacency list of graph G
 struct ll* adjacency_list(struct graph *G, int n, int m, char type) {
-    void single_list_insert(struct ll *L, int key, int w);
+    void graph_single_list_insert(struct ll *L, int key, int w);
 
+    // initialize adjacency list
     struct ll *Adj = malloc(sizeof(struct ll) * n);
     for (int i=0; i<n; i++) {
         Adj[i].head = NULL;
     }
 
+    // directed graph
     if (type == 'd') {
         for (int i=0; i<m; i++) {
-            single_list_insert(&Adj[G->E[i].from], G->E[i].to, G->E[i].w);
+            graph_single_list_insert(&Adj[G->E[i].from], G->E[i].to, G->E[i].w);
         }
     }
+    // undirected graph
     else {
         for (int i=0; i<m; i++) {
-            single_list_insert(&Adj[G->E[i].from], G->E[i].to, G->E[i].w);
-            single_list_insert(&Adj[G->E[i].to], G->E[i].from, G->E[i].w);
+            graph_single_list_insert(&Adj[G->E[i].from], G->E[i].to, G->E[i].w);
+            graph_single_list_insert(&Adj[G->E[i].to], G->E[i].from, G->E[i].w);
         }
     }
 

@@ -49,16 +49,19 @@ int main() {
         scanf("%d", &n);
     }
     while (n <= 0);
+
+    int max_edges = n*n;
     do {
-        printf("Enter number of edges(0<=m<=n^2): ");
+        printf("Enter number of edges(0<=m<=%d): ", max_edges);
         scanf("%d", &m);
     }
-    while (m < 0 || m > (n*n));
+    while (m < 0 || m > max_edges);
 
     // generate random directed graph
     struct graph G;
     directed_graph(&G, n, m);
 
+    // print vertices and edges
     printf("Vertices: [");
     for (int i=0; i<n; i++) {
         printf(" %d ", G.V[i].key);
@@ -71,7 +74,7 @@ int main() {
     }
     printf("]\n");
 
-
+    // print adjacency list
     struct ll *Adj = adjacency_list(&G, n, m, 'd');
     printf("Adjacency list:\n");
     for (int i=0; i<n; i++) {
@@ -86,13 +89,15 @@ int main() {
         printf("\n");
     }
 
+    // do DFS
     DFS(&G, n, Adj);
 
-    int s = rand() % n;
-    printf("Path from %d to its root: ", s);
-    while (s != NIL) {
-        printf(" %d ", s);
-        s = G.V[s].p;
+    // pick a vertex then print path from it to its root
+    int v = rand() % n;
+    printf("Path from %d to its root: ", v);
+    while (v != NIL) {
+        printf(" %d ", v);
+        v = G.V[v].p;
     }
     printf("\n");
 

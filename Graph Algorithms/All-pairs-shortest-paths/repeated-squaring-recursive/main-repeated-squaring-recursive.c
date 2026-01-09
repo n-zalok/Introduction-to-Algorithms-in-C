@@ -40,7 +40,7 @@ int main() {
     }
     while (n <= 0);
 
-    int max_edges = n * n;
+    int max_edges = n*n;
     do {
         printf("Enter number of edges(0<=m<=%d): ", max_edges);
         scanf("%d", &m);
@@ -58,6 +58,14 @@ int main() {
         }
     }
 
+    // initialize weight matrix W and parent matrix P
+    // W[i][j] is 
+    // weight of the edge (i, j) if (i, j) belongs to E
+    // 0 if  i = j
+    // infinity otherwise
+    // P[i][j] is
+    // i if (i, j) belongs to E
+    // NIL otherwise
     int **W = malloc(sizeof(int*) * n);
     int **P = malloc(sizeof(int*) * n);
     for (int i=0; i<n; i++) {
@@ -76,14 +84,6 @@ int main() {
             P[i][j] = NIL;
         }
     }
-
-    printf("Vertices: [");
-    for (int i=0; i<n; i++) {
-        printf(" %d ", G.V[i].key);
-    }
-    printf("]\n");
-
-    printf("Edges (from, to, weight): [");
     for (int i=0; i<m; i++) {
         int u = G.E[i].from;
         int v = G.E[i].to;
@@ -93,16 +93,29 @@ int main() {
             W[u][v] = w;
             P[u][v] = u;
         }
+    }
 
-        printf(" (%d, %d, %d) ", u, v, w);
+    // print vertices and edges
+    printf("Vertices: [");
+    for (int i=0; i<n; i++) {
+        printf(" %d ", G.V[i].key);
+    }
+    printf("]\n");
+
+    printf("Edges (from, to, weight): [");
+    for (int i=0; i<m; i++) {
+        printf(" (%d, %d, %d) ", G.E[i].from, G.E[i].to, G.E[i].w);
     }
     printf("]\n");
     
 
+    // compute shortest paths matrix L and 
+    // its corresponding parent matrix P_print
     int ***location = repeated_squaring_recursive(W, P, n);
     int **L = location[0];
     int **P_print = location[1];
 
+    // print all pairs paths
     printf("All pairs paths:\n");
     for (int i=0; i<n; i++) {
         printf("Source: %d\n", i);

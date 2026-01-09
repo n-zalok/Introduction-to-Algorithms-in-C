@@ -20,6 +20,8 @@ struct graph {
     struct edge *E;
 };
 
+// set v.d = infinity and v.p = NIL for all v
+// set source.d = 0
 void initialize_single_source(struct graph *G, int n, int s) {
     #define NIL -1
     #define INF 2147483647  // to avoid overflow

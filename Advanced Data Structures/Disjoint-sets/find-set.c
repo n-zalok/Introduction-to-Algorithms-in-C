@@ -9,7 +9,9 @@ struct vertex {
     char color;
 };
 
+// find and return the root of the set
 int find_set(struct vertex *V, int x) {
+    // if vertex isn't root find its parent
     if (V[x].key != V[x].p) {
         V[x].p = find_set(V, V[x].p);
     }

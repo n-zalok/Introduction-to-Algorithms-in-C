@@ -38,7 +38,7 @@ int main() {
     }
     while (n <= 0);
 
-    int max_edges = n * n;
+    int max_edges = n*n;
     do {
         printf("Enter number of edges(0<=m<=%d): ", max_edges);
         scanf("%d", &m);
@@ -56,11 +56,15 @@ int main() {
         }
     }
 
+    // initialize weight matrix W
+    // W[i][j] is 
+    // weight of the edge (i, j) if (i, j) belongs to E
+    // 0 if  i = j
+    // infinity otherwise
     int **W = malloc(sizeof(int*) * n);
     for (int i=0; i<n; i++) {
         W[i] = malloc(sizeof(int) * n);
     }
-
     for (int i=0; i<n; i++) {
         for (int j=0; j<n; j++) {
             if (i == j) {
@@ -71,14 +75,6 @@ int main() {
             }
         }
     }
-
-    printf("Vertices: [");
-    for (int i=0; i<n; i++) {
-        printf(" %d ", G.V[i].key);
-    }
-    printf("]\n");
-
-    printf("Edges (from, to, weight): [");
     for (int i=0; i<m; i++) {
         int u = G.E[i].from;
         int v = G.E[i].to;
@@ -87,14 +83,25 @@ int main() {
         if (u != v) {
             W[u][v] = w;
         }
+    }
 
-        printf(" (%d, %d, %d) ", u, v, w);
+    // print vertices and edges
+    printf("Vertices: [");
+    for (int i=0; i<n; i++) {
+        printf(" %d ", G.V[i].key);
+    }
+    printf("]\n");
+
+    printf("Edges (from, to, weight): [");
+    for (int i=0; i<m; i++) {
+        printf(" (%d, %d, %d) ", G.E[i].from, G.E[i].to, G.E[i].w);
     }
     printf("]\n");
     
-
+    // compute transitive closure matrix T
     int **T = transitive_closure(W, n);
 
+    // print all reachable pairs
     printf("All reachable pairs (source, reachable vertices):\n");
     for (int i=0; i<n; i++) {
         printf("%d :", i);

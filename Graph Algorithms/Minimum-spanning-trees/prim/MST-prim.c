@@ -45,6 +45,8 @@ struct heap {
     int heap_size;
 };
 
+// construct a MST with root r where (v.p, v, v.d) 
+// for each vertex v resembles the edge (from, to, w)
 void MST_prim(struct graph *G, int n, struct ll *Adj, int r) {
     #define NIL -1
     #define INF 2147483647
@@ -52,6 +54,7 @@ void MST_prim(struct graph *G, int n, struct ll *Adj, int r) {
     struct node* heap_extract_min(struct heap *A);
     void heap_decrease_d(struct heap *A, int i, int d);
 
+    // initialize the heap
     struct node *arr = malloc(sizeof(struct node) * n);
     int *pos = malloc(sizeof(int) * n);
     for (int i=0; i<n; i++) {
@@ -65,6 +68,7 @@ void MST_prim(struct graph *G, int n, struct ll *Adj, int r) {
     arr[r].d = 0;
     G->V[r].d = 0;
 
+    // initialize the min-priority queue
     struct heap Q;
     Q.arr = arr;
     Q.pos = pos;
@@ -72,13 +76,19 @@ void MST_prim(struct graph *G, int n, struct ll *Adj, int r) {
 
     build_min_heap(&Q);
 
+    // while Q is not empty
     while (Q.heap_size != 0) {
         struct node *u = heap_extract_min(&Q);
 
+        // visit vertices reachable from u
         struct node_ll *v = Adj[u->key].head;
         while (v != NULL) {
+            // if v is in Q and 
+            // the weight of u->v is smaller than v's current edge's weight
             if (Q.pos[v->key] != NIL && v->w < G->V[v->key].d) {
+                // make u the parent of v
                 G->V[v->key].p = u->key;
+                // change v's current edge's weight
                 heap_decrease_d(&Q, Q.pos[v->key], v->w);
                 G->V[v->key].d = v->w;
             }

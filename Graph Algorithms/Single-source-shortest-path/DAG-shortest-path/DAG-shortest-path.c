@@ -31,15 +31,18 @@ struct ll {
     struct node_ll *head;
 };
 
+// construct a path from s to each reachable vertex v
+// such that v.d is distance from s to v
 void DAG_shortest_path(struct graph *G, int n, int m, struct ll *Adj, int s) {
     #define NULL ((void *)0)
     struct ll* topological_sort(struct graph *G, int n, struct ll *Adj);
     void initialize_single_source(struct graph *G, int n, int s);
     void relax(struct vertex *V, int u, int v, int w);
 
-    struct ll *order = topological_sort(G, n, Adj);
+    struct ll *order = topological_sort(G, n, Adj);  // topologically sort vertices
     initialize_single_source(G, n, s);
 
+    // relax edges of most dependent to least dependent vertices
     struct node_ll *u = order->head;
     while (u != NULL) {
         struct node_ll *v = Adj[u->key].head;

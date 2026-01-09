@@ -9,6 +9,7 @@ struct vertex {
     char color;
 };
 
+// initialize a new set
 void make_set(struct vertex *x) {
     x->p = x->key;
     x->rank = 0;

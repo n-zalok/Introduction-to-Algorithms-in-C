@@ -38,7 +38,8 @@ struct queue {
     int tail; // next location for insertion
 };
 
-
+// construct a path from each vertex v reachable from s to s
+// where v.d is number of edges between s and v
 void BFS(struct graph *G, int n, struct ll *Adj, int s) {
     #define NULL ((void *)0)
     #define INF 2147483647
@@ -46,6 +47,7 @@ void BFS(struct graph *G, int n, struct ll *Adj, int s) {
     void enqueue(struct queue *Q, int x);
     int dequeue(struct queue *Q);
 
+    // initialize vertices
     for (int i=0; i<n; i++) {
         if (i == s) {
             G->V[i].color = 'g';
@@ -59,6 +61,7 @@ void BFS(struct graph *G, int n, struct ll *Adj, int s) {
         }
     }
 
+    // initialize queue
     struct queue Q;
     int arr[n];
     Q.arr  = arr;
@@ -66,10 +69,12 @@ void BFS(struct graph *G, int n, struct ll *Adj, int s) {
     Q.head = 0;
     Q.tail = 0;
 
+    // enqueue source
     enqueue(&Q, s);
-    while (Q.head != Q.tail) {
+    while (Q.head != Q.tail) {  // while Q is not empty
         int u = dequeue(&Q);
 
+        // visit vertices reachable from u
         struct node_ll *v = Adj[u].head;
         while (v != NULL) {
             if (G->V[v->key].color == 'w') {
@@ -83,6 +88,7 @@ void BFS(struct graph *G, int n, struct ll *Adj, int s) {
             v = v->next;
         }
 
+        // mark u as finished
         G->V[u].color = 'b';
     }
 }

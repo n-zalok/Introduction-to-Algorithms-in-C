@@ -37,7 +37,7 @@ int main() {
     }
     while (n <= 0);
 
-    int max_edges = n * n;
+    int max_edges = n*n;
     do {
         printf("Enter number of edges(0<=m<=%d): ", max_edges);
         scanf("%d", &m);
@@ -49,6 +49,7 @@ int main() {
     struct graph G;
     directed_graph(&G, n, m);
 
+    // print vertices and edges
     printf("Vertices: [");
     for (int i=0; i<n; i++) {
         printf(" %d ", G.V[i].key);
@@ -61,16 +62,18 @@ int main() {
     }
     printf("]\n");
     
-    int s = rand() % n;
+    // compute shortest paths
+    int s = rand() % n;  // pick a source
     printf("source: %d\n", s);
-    if (bellman_ford(&G, n, m, s)) {
+    if (bellman_ford(&G, n, m, s)) {  // no negative cycle
+        // print shortest paths
         printf("(vertex, shortest-path): [");
         for (int i=0; i<n; i++) {
             printf(" (%d, %d) ", G.V[i].key, G.V[i].d);
         }
         printf("]\n");
     }
-    else {
+    else {  // negative cycle
         printf("A negative cycle exists\n");
     }
 

@@ -37,19 +37,22 @@ int main() {
     }
     while (n <= 0);
     
+    // set m to max edges to guarantee multiple possible trees
+    // such that the problem is not trivial
     m = ((n*n)-n)/2;
 
     // generate random directed graph
     struct graph G;
     undirected_graph(&G, n, m);
 
+    // print vertices
     printf("Vertices: [");
     for (int i=0; i<n; i++) {
         printf(" %d ", G.V[i].key);
     }
     printf("]\n");
 
-    
+    // get list of edges used in MST and print them
     int *MST = MST_kruskal(&G, n, m);
     printf("MST Edges (from, to, weight): [");
     for (int i=0; i<n-1; i++) {

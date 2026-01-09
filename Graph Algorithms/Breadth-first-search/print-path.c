@@ -22,6 +22,7 @@ struct graph {
     struct edge *E;
 };
 
+// print path from s to v
 void print_path(struct graph *G, int s, int v) {
     #define NIL -1
 

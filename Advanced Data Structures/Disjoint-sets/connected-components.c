@@ -20,7 +20,7 @@ struct graph {
     struct edge *E;
 };
 
-
+// make vertices of each connected component belong to the same set
 void connected_components(struct graph *G, int n, int m) {
     void make_set(struct vertex *x);
     int find_set(struct vertex *V, int x);

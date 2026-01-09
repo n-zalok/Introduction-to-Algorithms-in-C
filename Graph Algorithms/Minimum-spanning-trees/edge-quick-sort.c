@@ -4,6 +4,7 @@ struct edge {
     int w;  // weight
 };
 
+// sort edges from E[p] to E[r]
 void edge_quick_sort(struct edge *E, int p, int r) {
     int edge_randomized_partition(struct edge *E, int p, int r);
 

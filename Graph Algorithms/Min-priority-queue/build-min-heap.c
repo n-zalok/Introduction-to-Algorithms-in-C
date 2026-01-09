@@ -2,16 +2,17 @@
 
 struct node {
     int key;
-    int d;
+    int d;  // distance
 };
 
 struct heap {
     struct node *arr;
-    int *pos;
+    int *pos;  // pos[i] is the position of ith element
     int length;
     int heap_size;
 };
 
+// transform A into min-heap
 void build_min_heap(struct heap *A) {
     void min_heapify(struct heap *A, int i);
 

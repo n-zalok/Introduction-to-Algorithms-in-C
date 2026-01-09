@@ -45,6 +45,8 @@ struct heap {
     int heap_size;
 };
 
+// construct a path from s to each reachable vertex v
+// such that v.d is distance from s to v
 void Dijkstra(struct graph *G, int n, struct ll *Adj, int s) {
     #define NULL ((void *)0)
     #define INF 2147483647
@@ -56,6 +58,7 @@ void Dijkstra(struct graph *G, int n, struct ll *Adj, int s) {
 
     initialize_single_source(G, n, s);
 
+    // initialize the heap
     struct node *arr = malloc(sizeof(struct node) * n);
     int *pos = malloc(sizeof(int) * n);
     for (int i=0; i<n; i++) {
@@ -65,6 +68,7 @@ void Dijkstra(struct graph *G, int n, struct ll *Adj, int s) {
     }
     arr[s].d = 0;
 
+    // initialize the min-priority queue
     struct heap Q;
     Q.arr = arr;
     Q.pos = pos;
@@ -72,9 +76,11 @@ void Dijkstra(struct graph *G, int n, struct ll *Adj, int s) {
 
     build_min_heap(&Q);
 
+    // while Q is not empty
     while (Q.heap_size != 0) {
         struct node *u = heap_extract_min(&Q);
 
+        // visit vertices reachable from u
         struct node_ll *v = Adj[u->key].head;
         while (v != NULL) {
             if (G->V[u->key].d != INF && v->w != INF && G->V[v->key].d > (G->V[u->key].d + v->w)) {

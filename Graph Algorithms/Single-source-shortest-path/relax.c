@@ -9,6 +9,7 @@ struct vertex {
     char color;
 };
 
+// relax the edge u->v if it yields smaller distance
 void relax(struct vertex *V, int u, int v, int w) {
     #define INF 2147483647
     

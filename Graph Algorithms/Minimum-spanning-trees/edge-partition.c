@@ -4,6 +4,7 @@ struct edge {
     int w;  // weight
 };
 
+// return index of pivot point(r) after partition
 int edge_partition(struct edge *E, int p, int r) {
     int x = E[r].w;  // pivot point
     int i = p - 1;

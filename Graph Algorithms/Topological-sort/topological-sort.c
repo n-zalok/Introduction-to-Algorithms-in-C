@@ -36,16 +36,20 @@ struct ll {
 
 int topological_time = 0;
 
-struct ll* topological_sort(struct graph *G, int n, struct ll *Adj) {
+// return a ll containing vertices sorted in topological order
+struct ll* topological_sort(struct graph *G, int n, struct ll *Adj) {  // G is a DAG
     #define NIL -1
     void topological_DFS_visit(struct graph *G, struct ll *Adj, int u, struct ll *order);
 
+    // initialize vertices
     for (int i=0; i<n; i++) {
         G->V[i].color = 'w';
         G->V[i].p = NIL;
     }
 
+    // initialize order list
     struct ll *order = malloc(sizeof(struct ll));
+
     for (int i=0; i<n; i++) {
         if (G->V[i].color == 'w') {
             topological_DFS_visit(G, Adj, i, order);
@@ -60,9 +64,10 @@ void topological_DFS_visit(struct graph *G, struct ll *Adj, int u, struct ll *or
     void single_list_insert(struct ll *L, int key, int w);
 
     topological_time += 1;
-    G->V[u].d = topological_time;
+    G->V[u].d = topological_time;  // record discovery time
     G->V[u].color = 'g';
 
+    // visit vertices reachable from u
     struct node_ll *v = Adj[u].head;
     while (v != NULL) {
         if (G->V[v->key].color == 'w') {
@@ -73,9 +78,10 @@ void topological_DFS_visit(struct graph *G, struct ll *Adj, int u, struct ll *or
         v = v->next;
     }
 
-    G->V[u].color = 'b';
+    G->V[u].color = 'b';           // mark u as finished
     topological_time += 1;
-    G->V[u].f = topological_time;
+    G->V[u].f = topological_time;  // record finish time
 
+    // insert u into the order list
     single_list_insert(order, u, 0);
 }

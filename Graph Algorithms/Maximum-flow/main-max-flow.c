@@ -20,6 +20,8 @@ struct graph {
 };
 
 int main() {
+    #define source 0
+    #define sink n-1
     srand(time(NULL));
     void flow_network(struct graph *G, int n, int m);
     int Edmonds_Karp(struct graph *G, int n, int m, int s, int t);
@@ -40,12 +42,11 @@ int main() {
     }
     while (m < min_edges || m > max_edges);
 
-    #define source 0
-    #define sink n-1
     // generate random flow network
     struct graph G;
     flow_network(&G, n, m);
 
+    // print vertices and edges
     printf("Vertices: [");
     for (int i=0; i<n; i++) {
         if (i==source) {
@@ -86,6 +87,7 @@ int main() {
     }
     printf("]\n");
 
+    // compute maximum flow
     printf("Maximum flow: %d\n", Edmonds_Karp(&G, n, m, source, sink));
 
     return 0;
